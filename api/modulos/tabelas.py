@@ -96,6 +96,36 @@ def tabela_classes(pedido: dict) -> dict:
     p_m = r.passo(pm)
     r.resultado("soma_xi_ni", "Σ xi·ni", "Σxi·ni", sum(x * n for x, n in zip(pms, ns)), passo=p_m)
     r.resultado("media_ponderada", "Média ponderada", "x̄", m, u, p_m)
+    # P-09: FAA, mediana e moda por classes — fórmulas padrão de livro, fora do material; a confirmar com o professor.
+    aviso_p09 = "Pendência P-09: o material não traz FAA, mediana nem moda com classes. Usamos as fórmulas padrão de livro (interpolação e Czuber); confirme com o professor."
+    faa = [sum(ns[: i + 1]) for i in range(len(ns))]
+    p_faa = r.passo(Passo("Frequência acumulada (FAA)", "Fórmula padrão de livro · P-09",
+                          linhas=[f"{Fq.texto_classe(a, b, intervalo)}: " + " + ".join(d(n) for n in ns[: i + 1]) + f" = {d(c)}" for i, ((a, b), c) in enumerate(zip(classes, faa))],
+                          tabela=tabela(["Classe", "ni", "FAA"], [[Fq.texto_classe(a, b, intervalo), d(n), d(c)] for (a, b), n, c in zip(classes, ns, faa)]),
+                          aviso_material=aviso_p09, resultado=", ".join(d(c) for c in faa)))
+    r.resultado("faa", "Frequência acumulada (FAA)", "FAA", faa, passo=p_faa, exibicao=", ".join(d(c) for c in faa))
+    k = next(i for i, c in enumerate(faa) if c >= N / 2)
+    a, b = classes[k]
+    ant = faa[k - 1] if k else F(0)
+    me = a + (N / 2 - ant) / ns[k] * (b - a)
+    pme = r.passo(Passo("Mediana com classes", "Fórmula padrão de livro · P-09", formula_latex=r"Md=l_i+\frac{\frac{n}{2}-FAA_{ant}}{n_{md}}\times h",
+                        linhas=[f"n ÷ 2 = {d(N)} ÷ 2 = {d(N / 2)}; a primeira FAA que chega lá é {d(faa[k])}, na classe {Fq.texto_classe(a, b, intervalo)}",
+                                f"li = {d(a)}, FAA anterior = {d(ant)}, n da classe = {d(ns[k])}, h = {d(b - a)}",
+                                f"Md = {d(a)} + ({d(N / 2)} − {d(ant)}) ÷ {d(ns[k])} × {d(b - a)} {ig(me)}"],
+                        aviso_material=aviso_p09, resultado=fmt(me)))
+    r.resultado("mediana_classes", "Mediana (classes)", "Md", me, u, pme)
+    mx_i = max(range(len(ns)), key=lambda i: ns[i])
+    d1 = ns[mx_i] - (ns[mx_i - 1] if mx_i else 0)
+    d2 = ns[mx_i] - (ns[mx_i + 1] if mx_i < len(ns) - 1 else 0)
+    a, b = classes[mx_i]
+    mo = a + d1 / (d1 + d2) * (b - a)
+    pmo = r.passo(Passo("Moda com classes (Czuber)", "Fórmula padrão de livro · P-09", formula_latex=r"Mo=l_i+\frac{d_1}{d_1+d_2}\times h",
+                        linhas=[f"Classe modal (maior ni): {Fq.texto_classe(a, b, intervalo)} com {d(ns[mx_i])}",
+                                f"d1 = ni − ni anterior = {d(d1)}; d2 = ni − ni seguinte = {d(d2)}",
+                                f"Mo = {d(a)} + {d(d1)} ÷ ({d(d1)} + {d(d2)}) × {d(b - a)} {ig(mo)}"],
+                        aviso_material=aviso_p09, resultado=fmt(mo)))
+    r.resultado("moda_classes", "Moda (classes)", "Mo", mo, u, pmo)
+    r.avisos.append(aviso_p09)
     xmin, xmax = classes[0][0], classes[-1][1]
     at, pat = D.amplitude(xmin, xmax, u)
     pat.linhas.append(f"Também vale: maior ponto médio − menor ponto médio = {d(pms[-1])} − {d(pms[0])} = {d(pms[-1] - pms[0])} (apostila p.32).")

@@ -187,3 +187,12 @@ def test_trabalho_tma_call_center_classes_de_25_a_partir_de_40():
     b = MODULOS["dados_brutos"]({"modulo": "dados_brutos", "valores": v, "tipo_dados": "populacao"})
     d = {x["id"]: x["valor"] for x in b["resultados"]}
     assert d["amplitude_total"] == 133 and d["mediana"] == 99.5 and abs(d["media"] - 103.925) < 1e-9
+
+
+def test_classes_faa_mediana_moda_p09():
+    """P-09 (fórmulas padrão de livro): TMA call center, ni = 4,10,12,8,4,2."""
+    t = MODULOS["tabela_classes"]({"modulo": "tabela_classes", "classes": [[40 + 25 * i, 65 + 25 * i, n] for i, n in enumerate([4, 10, 12, 8, 4, 2])], "intervalo": "[a,b)"})
+    m = {x["id"]: x["valor"] for x in t["resultados"]}
+    assert m["faa"] == [4, 14, 26, 34, 38, 40]
+    assert m["mediana_classes"] == 90 + (20 - 14) / 12 * 25  # 102.5
+    assert m["moda_classes"] == 90 + 2 / (2 + 4) * 25
