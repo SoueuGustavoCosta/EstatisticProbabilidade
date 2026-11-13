@@ -28,10 +28,10 @@ Execute uma fase por vez. Ao fim de cada fase: rodar testes, mostrar o resultado
 - [x] Avisos de material (E-xx) e pendências (P-xx) exibidos quando aplicável.
 
 ## Fase 4 — Trilhas
-- [ ] Personagens SVG (Profª Sigma e Dado) com poses.
-- [ ] `TrilhaPlayer` com os tipos de card do `03` (fala, formula, tabela-animada, passo-calculo, arrasta-solta, escolha, preencher, grafico, dica, aviso-material) e o laser apontando.
-- [ ] Conteúdo das 13 trilhas (do `03` + `02`).
-- [ ] Desafios usando `data/exercicios.json`.
+- [x] ~~Personagens SVG~~ removidos por decisão de 13/11/2026 (docs/07): "dúvida comum" e destaque azul no lugar.
+- [x] `TrilhaPlayer` com os tipos de card do `03` (fala, formula, tabela-animada, passo-calculo, arrasta-solta, escolha, preencher, grafico, dica, aviso-material) e o laser apontando.
+- [x] Conteúdo das 13 trilhas (do `03` + `02`).
+- [x] Desafios usando `data/exercicios.json`.
 
 ## Fase 5 — Gamificação e polimento
 - [ ] XP, streak, medalhas, progresso no localStorage.

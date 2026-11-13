@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { TRILHAS } from "../trilhas/lista";
 
 export function ListaTrilhas() {
   return (
     <div className="grid gap-3.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(320px,100%), 1fr))" }}>
       {TRILHAS.map((t) => (
-        <div key={t.num} className="flex items-center gap-4 rounded-[18px] bg-cartao px-[22px] py-5">
+        <Link key={t.num} to={`/trilhas/${t.num}`} className="flex items-center gap-4 rounded-[18px] bg-cartao px-[22px] py-5 text-texto transition hover:-translate-y-0.5 hover:shadow-lg">
           <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-fundo font-bold text-texto-2">
             {t.num}
           </span>
@@ -13,7 +14,7 @@ export function ListaTrilhas() {
             <span className="text-[13px] text-texto-2">{t.fonte}</span>
           </span>
           <span className="flex-none text-[13px] font-semibold text-texto-2">Nova</span>
-        </div>
+        </Link>
       ))}
     </div>
   );
