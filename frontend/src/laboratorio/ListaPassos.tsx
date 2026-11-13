@@ -47,10 +47,10 @@ function TabelaSimples({ t }: { t: TabelaPasso }) {
 
 export function CartaoPasso({ p }: { p: PassoApi }) {
   return (
-    <article id={`passo-${p.n}`} className="flex scroll-mt-20 flex-col gap-3 rounded-[20px] bg-cartao p-6 shadow-cartao">
+    <article id={`passo-${p.n}`} className="flex min-w-0 scroll-mt-20 flex-col gap-3 rounded-[20px] bg-cartao p-4 shadow-cartao sm:p-6">
       <header className="flex items-baseline gap-3">
         <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-azul-claro text-sm font-bold text-azul">{p.n}</span>
-        <div><h3 className="m-0 text-xl font-semibold">{p.titulo}</h3><span className="text-[13px] text-texto-2">Fonte: {p.fonte}</span></div>
+        <div><h3 className="m-0 text-lg font-semibold sm:text-xl">{p.titulo}</h3><span className="text-[13px] text-texto-2">Fonte: {p.fonte}</span></div>
       </header>
       {p.formula_latex && <div className="overflow-x-auto rounded-xl bg-fundo px-4 py-2"><Formula latex={p.formula_latex} />{p.substituicao_latex && <Formula latex={p.substituicao_latex} />}</div>}
       {p.linhas.length > 0 && <div className="flex flex-col gap-1 font-mono text-[15px] leading-relaxed text-texto-3">{p.linhas.map((l, i) => <p key={i} className="m-0 break-words">{l}</p>)}</div>}
@@ -61,7 +61,7 @@ export function CartaoPasso({ p }: { p: PassoApi }) {
       {p.aviso_material && <p role="note" className="m-0 rounded-xl border border-aviso bg-aviso-fundo px-4 py-2 text-[14px] text-aviso">{p.aviso_material}</p>}
       {p.teclas_calculadora.length > 0 && (
         <details className="rounded-xl bg-fundo px-4 py-2">
-          <summary className="cursor-pointer text-[15px] font-medium text-link">Fazer na calculadora</summary>
+          <summary className="flex min-h-11 cursor-pointer items-center text-[15px] font-medium text-link">Fazer na calculadora</summary>
           <div className="pt-3"><MiniCalculadora teclas={p.teclas_calculadora} /></div>
         </details>
       )}

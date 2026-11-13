@@ -26,13 +26,13 @@ export default function Calculadora() {
   }, []);
 
   return (
-    <div className="mx-auto flex max-w-[1240px] flex-wrap items-start justify-center gap-10 px-6 pb-16 pt-10">
+    <div className="mx-auto flex max-w-[1240px] flex-wrap items-start justify-center gap-8 px-3 pb-10 pt-4 sm:gap-10 sm:px-6 sm:pb-16 sm:pt-10">
       <section aria-label="Calculadora Casio fx-82MS" className="w-full max-w-[420px] flex-[0_1_420px]">
         <Aparelho estado={estado} aoApertar={tecla} />
       </section>
       <aside className="flex max-w-[520px] flex-[1_1_380px] flex-col gap-5">
         <div>
-          <h1 className="m-0 text-[40px] font-bold">Calculadora</h1>
+          <h1 className="m-0 px-1 text-[32px] font-bold sm:px-0 sm:text-[40px]">Calculadora</h1>
           <p className="mt-2 leading-relaxed text-texto-2">
             Mesmo layout da Casio fx-82MS. As funções em amarelo usam <b className="text-texto">SHIFT</b> antes. O teclado do computador também funciona
             (Enter = “=”, Backspace = DEL, Esc = AC).

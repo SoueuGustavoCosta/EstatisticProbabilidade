@@ -13,7 +13,7 @@ export function ListaTrilhas() {
         const pct = pctTrilha(p, t.num, total);
         const cor = pct === 100 ? "#248A3D" : pct > 0 ? "#0066CC" : "#6E6E73";
         return (
-        <Link key={t.num} to={`/trilhas/${t.num}`} className="flex items-center gap-4 rounded-[18px] bg-cartao px-[22px] py-5 text-texto transition hover:-translate-y-0.5 hover:shadow-lg">
+        <Link key={t.num} to={`/trilhas/${t.num}`} className="flex min-h-[76px] items-center gap-3 rounded-[18px] bg-cartao px-4 py-4 sm:gap-4 sm:px-[22px] sm:py-5 text-texto transition hover:-translate-y-0.5 hover:shadow-lg">
           <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-fundo font-bold text-texto-2">
             {t.num}
           </span>
@@ -34,10 +34,10 @@ export function ListaTrilhas() {
 
 export default function Trilhas() {
   return (
-    <section className="bg-fundo px-6 pb-20 pt-14">
+    <section className="bg-fundo px-4 pb-12 pt-8 sm:px-6 sm:pb-20 sm:pt-14">
       <div className="mx-auto flex max-w-[1080px] flex-col gap-7">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="m-0 text-[40px] font-bold">Trilhas</h1>
+          <h1 className="m-0 text-[32px] font-bold sm:text-[40px]">Trilhas</h1>
           <span className="text-texto-2">Todas abertas. A ordem é só uma sugestão.</span>
         </div>
         <ListaTrilhas />

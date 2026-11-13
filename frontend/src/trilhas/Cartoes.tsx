@@ -4,12 +4,12 @@ import { CartesianGrid, Line, LineChart, Bar, BarChart, ResponsiveContainer, Too
 import Formula from "../componentes/Formula";
 import { Card, Duvida } from "./tipos";
 
-const caixa = "flex flex-col gap-4 rounded-[22px] bg-cartao p-7 shadow-cartao";
-const btn = "rounded-pilula bg-azul px-5 py-2.5 text-[15px] font-medium text-white hover:brightness-110 disabled:opacity-50";
+const caixa = "flex min-w-0 flex-col gap-4 rounded-[22px] bg-cartao p-5 shadow-cartao sm:p-7";
+const btn = "min-h-11 rounded-pilula bg-azul px-5 py-2.5 text-[15px] font-medium text-white hover:brightness-110 disabled:opacity-50";
 
 export const Duvida_ = ({ d }: { d: Duvida }) => (
   <details className="rounded-xl bg-fundo px-4 py-3">
-    <summary className="cursor-pointer text-[15px] font-medium">Dúvida comum: {d.p}</summary>
+    <summary className="flex min-h-11 cursor-pointer items-center text-[15px] font-medium">Dúvida comum: {d.p}</summary>
     <p className="m-0 pt-2 text-[15px] text-texto-3">{d.r}</p>
   </details>
 );
@@ -46,7 +46,7 @@ function Escolha({ c, aoResponder }: { c: Extract<Card, { tipo: "escolha" }>; ao
       <div role="radiogroup" className="flex flex-col gap-2">
         {c.opcoes.map((o, i) => {
           const estado = sel === null ? "" : i === c.correta ? "border-verde bg-verde-fundo" : i === sel ? "border-vermelho bg-vermelho-fundo" : "opacity-60";
-          return <button key={i} type="button" role="radio" aria-checked={sel === i} disabled={sel !== null} onClick={() => responder(i)} className={`rounded-xl border border-campo px-4 py-3 text-left text-[16px] ${estado}`}>{o}</button>;
+          return <button key={i} type="button" role="radio" aria-checked={sel === i} disabled={sel !== null} onClick={() => responder(i)} className={`min-h-12 rounded-xl border border-campo px-4 py-3 text-left text-[16px] ${estado}`}>{o}</button>;
         })}
       </div>
       {sel !== null && <Retorno ok={sel === c.correta} texto={c.explicacao} />}
@@ -66,8 +66,8 @@ function Preencher({ c, aoResponder }: { c: Extract<Card, { tipo: "preencher" }>
   return (
     <form className={caixa} onSubmit={(e) => { e.preventDefault(); conferir(); }}>
       <h2 className="m-0 text-xl font-semibold">{c.pergunta}</h2>
-      <div className="flex items-center gap-3">
-        <input aria-label="Sua resposta" inputMode="decimal" value={v} onChange={(e) => { setV(e.target.value); }} className="w-40 rounded-xl border border-campo px-3.5 py-2.5 font-mono text-[17px]" />
+      <div className="flex flex-wrap items-center gap-3">
+        <input aria-label="Sua resposta" inputMode="decimal" value={v} onChange={(e) => { setV(e.target.value); }} className="min-h-11 w-32 rounded-xl border border-campo px-3.5 py-2.5 font-mono text-[17px] sm:w-40" />
         {c.unidade && <span className="text-texto-2">{c.unidade}</span>}
         <button type="submit" className={btn} disabled={!v.trim()}>Conferir</button>
       </div>
@@ -92,7 +92,7 @@ function Classificar({ c, aoResponder }: { c: Extract<Card, { tipo: "classificar
               {c.categorias.map((cat, k) => {
                 const marcado = esc[i] === k;
                 const cor = conf ? (k === certa ? "border-verde bg-verde-fundo" : marcado ? "border-vermelho bg-vermelho-fundo" : "") : marcado ? "border-azul bg-azul-claro" : "";
-                return <button key={k} type="button" role="radio" aria-checked={marcado} disabled={conf} onClick={() => setEsc(esc.map((e, a) => (a === i ? k : e)))} className={`rounded-full border border-campo bg-white px-3.5 py-1.5 text-[15px] ${cor}`}>{cat}</button>;
+                return <button key={k} type="button" role="radio" aria-checked={marcado} disabled={conf} onClick={() => setEsc(esc.map((e, a) => (a === i ? k : e)))} className={`min-h-11 rounded-full border border-campo bg-white px-4 py-2 text-[15px] ${cor}`}>{cat}</button>;
               })}
             </div>
           </li>
@@ -128,7 +128,7 @@ export default function CartaoTrilha({ c, aoResponder }: { c: Card; aoResponder:
     case "fala":
       return (
         <div className={caixa}>
-          <Titulo t={c.titulo} /><p className="m-0 text-[19px] leading-relaxed">{c.texto}</p>
+          <Titulo t={c.titulo} /><p className="m-0 text-[17px] leading-relaxed sm:text-[19px]">{c.texto}</p>
           {c.lista && <ol className="m-0 flex list-none flex-col gap-2 p-0">{c.lista.map((l, i) => <li key={i} className="rounded-xl bg-azul-claro px-4 py-2.5 text-[16px]">{l}</li>)}</ol>}
           {c.duvida && <Duvida_ d={c.duvida} />}
         </div>
@@ -156,8 +156,8 @@ export default function CartaoTrilha({ c, aoResponder }: { c: Card; aoResponder:
           <p className="m-0 text-[14px] text-texto-2">A calculadora ao lado mostra as teclas desta conta.</p>
         </div>
       );
-    case "dica": return <div className="rounded-[22px] bg-aviso-fundo p-7 text-[18px] leading-relaxed text-aviso">💡 {c.texto}</div>;
-    case "aviso": return <div role="note" className="rounded-[22px] border border-aviso bg-aviso-fundo p-7 text-[17px] leading-relaxed text-aviso">⚠️ {c.texto}</div>;
+    case "dica": return <div className="rounded-[22px] bg-aviso-fundo p-5 text-[17px] sm:p-7 sm:text-[18px] leading-relaxed text-aviso">💡 {c.texto}</div>;
+    case "aviso": return <div role="note" className="rounded-[22px] border border-aviso bg-aviso-fundo p-5 text-[16px] sm:p-7 sm:text-[17px] leading-relaxed text-aviso">⚠️ {c.texto}</div>;
     case "escolha": return <Escolha c={c} aoResponder={aoResponder} />;
     case "preencher": return <Preencher c={c} aoResponder={aoResponder} />;
     case "classificar": return <Classificar c={c} aoResponder={aoResponder} />;

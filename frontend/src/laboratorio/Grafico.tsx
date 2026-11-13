@@ -81,7 +81,7 @@ export default function Grafico({ g }: { g: G }) {
   const titulo = { barras: "Frequências", histograma: "Histograma", sino: "Curva normal", arvore: "Árvore de probabilidades" }[g.tipo] ?? "Gráfico";
   const numerico = g.tipo === "barras" && g.marcadores.length > 0 && typeof g.series[0]?.x === "number";
   return (
-    <section aria-labelledby="grafico" className="flex flex-col gap-3 rounded-[20px] bg-cartao p-6 shadow-cartao">
+    <section aria-labelledby="grafico" className="flex min-w-0 flex-col gap-3 rounded-[20px] bg-cartao p-4 shadow-cartao sm:p-6">
       <h2 id="grafico" className="m-0 text-[22px] font-semibold">{titulo}</h2>
       {g.tipo === "sino" ? <Sino g={g} /> : g.tipo === "arvore" ? <Arvore g={g} /> : numerico ? <BarrasNumericas g={g} /> : <Categorico g={g} />}
       {g.histograma && <><h3 className="m-0 mt-2 text-lg font-semibold">Histograma das classes</h3><Categorico g={{ ...g, tipo: "histograma", series: g.histograma.map((h) => ({ classe: h.classe, ni: h.ni })) }} /></>}
