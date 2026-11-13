@@ -35,3 +35,11 @@ trilha-estatistica/
 ## Material usado
 `aula 1.pdf` a `aula 06.pdf` (slides) e `estatistica.pdf` (apostila, Profa. Luana Amaral Gurgel, Editora Prominas, 2024).
 `MANUAL.pdf` é o manual de normas ABNT da faculdade — não tem conteúdo da matéria, então não entra no app.
+
+## Deploy na Vercel
+1. Em vercel.com, **Add New → Project** e importe o repositório do GitHub. Deixe **Root Directory** na raiz (o front importa `data/`, que fica fora de `frontend/`).
+2. Framework Preset: **Other**. O `vercel.json` já define o build (`cd frontend && npm install && npm run build`), a saída (`frontend/dist`) e os rewrites de `/api/*`.
+3. A Vercel instala `requirements.txt` (fastapi, pydantic) para a função `api/index.py`. Não há variáveis de ambiente.
+4. Depois do deploy, confira `https://SEU-PROJETO.vercel.app/api/saude` e um cálculo no Laboratório.
+
+Pelo terminal: `npx vercel` (teste) e `npx vercel --prod`.
