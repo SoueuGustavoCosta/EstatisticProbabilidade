@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Calculadora Casio fx-82MS</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F5F7}
+a{color:#0066CC}a:hover{color:#004E9E}
+.nav{text-decoration:none;color:#424245}
+.nav:hover{color:#1D1D1F}
+.k{cursor:pointer;transition:transform .06s ease, filter .1s ease}
+.k:hover{filter:brightness(1.15)}
+.k:active{transform:translateY(2px);filter:brightness(1.3)}
+.k:focus-visible{outline:2px solid #0071E3;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F5F5F7; color: #1D1D1F; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased">
+
+  <header style="background: rgba(255,255,255,.85); border-bottom: 1px solid #E8E8ED">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+      <a href="Main.dc.html" class="nav" style="font-weight: 600; font-size: 17px; color: #1D1D1F">Estatística</a>
+      <nav aria-label="Principal" style="display: flex; gap: 28px; font-size: 14px">
+        <a href="Main.dc.html" class="nav">Início</a>
+        <a href="Trilha.dc.html" class="nav">Trilhas</a>
+        <a href="Calculadora.dc.html" class="nav" style="color: #1D1D1F; font-weight: 600">Calculadora</a>
+        <a href="Laboratorio.dc.html" class="nav">Laboratório</a>
+      </nav>
+      <span style="font-size: 13px; color: #6E6E73">Casio fx-82MS</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 64px; display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: flex-start">
+
+    <section aria-label="Calculadora Casio fx-82MS" style="flex: 0 1 420px; max-width: 420px; width: 100%">
+      <div style="background: linear-gradient(170deg, #3A3A42 0%, #26262D 45%, #1C1C22 100%); border-radius: 34px 34px 46px 46px; padding: 22px 22px 30px; border: 1px solid #4A4A56; box-shadow: 0 30px 60px rgba(0,0,0,.18), 0 8px 18px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.08)">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 0 6px 10px">
+          <span style="font-weight: 800; letter-spacing: .12em; color: #D8D8E2; font-size: 17px">CASIO</span>
+          <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px">
+            <span style="font-weight: 700; color: #D8D8E2; font-size: 15px">fx-82MS</span>
+            <span style="font-size: 9px; color: #A1A1AA; letter-spacing: .08em">S-V.P.A.M.</span>
+          </span>
+        </div>
+        <div style="background: #111117; border-radius: 12px; padding: 10px">
+          <div role="status" aria-live="polite" style="background: linear-gradient(#C5D3AE, #AEBE95); border-radius: 6px; padding: 6px 10px 8px; color: #18200F; font-family: JetBrains Mono, monospace; height: 92px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+            <div style="display: flex; gap: 8px; font-size: 10px; font-weight: 700; height: 12px">
+              <span style="opacity: {{indS}}">S</span><span style="opacity: {{indSD}}">SD</span><span>D</span><span style="opacity: {{indM}}">M</span>
+            </div>
+            <div style="font-size: 17px; white-space: nowrap; overflow: hidden; direction: rtl; text-align: left"><bdi>{{linha1}}</bdi></div>
+            <div style="font-size: 30px; font-weight: 700; text-align: right">{{linha2}}</div>
+          </div>
+        </div>
+        <div style="height: 14px"></div>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px 8px; align-items: end">
+          <sc-for list="{{teclasSup}}" as="k" hint-placeholder-count="20">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; grid-column: {{k.col}}">
+              <span style="font-size: 10px; line-height: 1; height: 10px; white-space: nowrap; font-weight: 700"><span style="color: #F5C542">{{k.shift}}</span> <span style="color: #F2606A">{{k.alpha}}</span></span>
+              <button type="button" class="k" onClick="{{k.press}}" aria-label="{{k.aria}}" style="width: 100%; height: 34px; border-radius: 9px 9px 14px 14px; border: 0; font: 700 13px Inter, sans-serif; {{k.estilo}}">{{k.label}}</button>
+            </div>
+          </sc-for>
+        </div>
+        <div style="height: 16px"></div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px 10px">
+          <sc-for list="{{teclasInf}}" as="k" hint-placeholder-count="20">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 3px">
+              <span style="font-size: 10px; line-height: 1; height: 10px; white-space: nowrap; font-weight: 700"><span style="color: #F5C542">{{k.shift}}</span> <span style="color: #F2606A">{{k.alpha}}</span></span>
+              <button type="button" class="k" onClick="{{k.press}}" aria-label="{{k.aria}}" style="width: 100%; height: 46px; border-radius: 10px 10px 16px 16px; border: 0; font: 700 20px Inter, sans-serif; {{k.estilo}}">{{k.label}}</button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <aside style="flex: 1 1 380px; max-width: 520px; display: flex; flex-direction: column; gap: 20px">
+      <div>
+        <h1 style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -.025em">Calculadora</h1>
+        <p style="margin: 8px 0 0; color: #6E6E73; line-height: 1.5; font-size: 17px">Mesmo layout da Casio fx-82MS. As funções em amarelo usam <b style="color: #1D1D1F">SHIFT</b> antes.</p>
+      </div>
+
+      <div style="background: #FFFFFF; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <strong style="font-size: 19px; font-weight: 600">Modo SD: média e desvio padrão</strong>
+        <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; line-height: 1.5; font-size: 15px; color: #424245">
+          <li><b style="color: #1D1D1F">MODE</b>, depois <b style="color: #1D1D1F">2</b>: aparece SD no visor.</li>
+          <li><b style="color: #1D1D1F">SHIFT MODE</b>, depois <b style="color: #1D1D1F">1</b> (Scl): limpa dados antigos.</li>
+          <li>Digite um valor e aperte <b style="color: #1D1D1F">M+</b> (DT). Repita para cada valor.</li>
+          <li><b style="color: #1D1D1F">SHIFT 2</b> (S-VAR): <b style="color: #1D1D1F">1</b> x̄ · <b style="color: #1D1D1F">2</b> xσn · <b style="color: #1D1D1F">3</b> xσn-1, depois <b style="color: #1D1D1F">=</b>.</li>
+          <li><b style="color: #1D1D1F">SHIFT 1</b> (S-SUM): <b style="color: #1D1D1F">1</b> Σx² · <b style="color: #1D1D1F">2</b> Σx · <b style="color: #1D1D1F">3</b> n.</li>
+        </ol>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 14px; line-height: 1.45">
+          <div style="background: #F5F5F7; border-radius: 14px; padding: 12px 14px"><b style="font-family: JetBrains Mono, monospace">xσn</b> = σ populacional<br><span style="color: #6E6E73">divide por N</span></div>
+          <div style="background: #E8F2FC; border-radius: 14px; padding: 12px 14px"><b style="font-family: JetBrains Mono, monospace; color: #004E9E">xσn-1</b> = s amostral<br><span style="color: #424245">divide por n − 1</span></div>
+        </div>
+        <span style="font-size: 14px; color: #6E6E73">Teste com 2, 4, 6, 8, 10 (Aula 04): xσn = 2.828427125 e xσn-1 = 3.16227766.</span>
+      </div>
+
+      <div style="background: #FFFFFF; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 6px">
+        <strong style="font-size: 19px; font-weight: 600; margin-bottom: 6px">Histórico</strong>
+        <sc-for list="{{historico}}" as="h" hint-placeholder-count="3">
+          <div style="display: flex; justify-content: space-between; gap: 12px; font-family: JetBrains Mono, monospace; font-size: 15px; border-top: 1px solid #E8E8ED; padding: 10px 0"><span style="color: #6E6E73; overflow-wrap: anywhere">{{h.e}}</span><b>{{h.r}}</b></div>
+        </sc-for>
+        <sc-if value="{{semHistorico}}" hint-placeholder-val="{{ false }}"><span style="color: #6E6E73; font-size: 15px">Suas contas aparecem aqui.</span></sc-if>
+      </div>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { toks: [], res: '0', shift: false, sd: false, menu: null, dados: [], ans: 0, fresh: false, msg: '', hist: [] };
+  }
+  fmt(v) {
+    if (!isFinite(v)) throw new Error('math');
+    if (v === 0) return '0';
+    const a = Math.abs(v);
+    if (a >= 1e10 || a < 1e-9) {
+      const [m, e] = v.toExponential(9).split('e');
+      return parseFloat(m).toString() + '×10^' + parseInt(e, 10);
+    }
+    return parseFloat(v.toPrecision(10)).toString();
+  }
+  avaliar(toks) {
+    const t = toks.map((x) => x.i);
+    let p = 0;
+    const st = this.state;
+    const n = st.dados.length;
+    const soma = st.dados.reduce((a, b) => a + b, 0);
+    const media = n ? soma / n : NaN;
+    const sq = st.dados.reduce((a, b) => a + (b - media) * (b - media), 0);
+    const rad = (x) => x * Math.PI / 180;
+    const fact = (x) => { if (x < 0 || x > 69 || Math.floor(x) !== x) throw new Error('math'); let r = 1; for (let k = 2; k <= x; k++) r *= k; return r; };
+    const consts = { 'π': Math.PI, 'A': st.ans, 'x̄': media, 'σn': Math.sqrt(sq / n), 'σs': Math.sqrt(sq / (n - 1)), 'Σx': soma, 'Σx²': st.dados.reduce((a, b) => a + b * b, 0), 'n': n };
+    const funcs = { 'q(': Math.sqrt, 'r(': Math.cbrt, 's(': (x) => Math.sin(rad(x)), 'c(': (x) => Math.cos(rad(x)), 't(': (x) => Math.tan(rad(x)),
+      'S(': (x) => Math.asin(x) * 180 / Math.PI, 'K(': (x) => Math.acos(x) * 180 / Math.PI, 'T(': (x) => Math.atan(x) * 180 / Math.PI,
+      'l(': Math.log10, 'n(': Math.log, 'X(': (x) => Math.pow(10, x), 'Y(': Math.exp };
+    const isDig = (c) => c !== undefined && /[0-9.]/.test(c);
+    const startsPrim = (c) => c !== undefined && (isDig(c) || c === '(' || funcs[c] || consts[c] !== undefined);
+    const expr = () => { let v = term(); while (t[p] === '+' || t[p] === '-') { const o = t[p++]; const r = term(); v = o === '+' ? v + r : v - r; } return v; };
+    const term = () => { let v = comb(); for (;;) { if (t[p] === '*' || t[p] === '/') { const o = t[p++]; const r = comb(); if (o === '/' && r === 0) throw new Error('math'); v = o === '*' ? v * r : v / r; } else if (startsPrim(t[p])) { v = v * comb(); } else break; } return v; };
+    const comb = () => { let v = unary(); while (t[p] === 'C' || t[p] === 'P' || t[p] === 'R') { const o = t[p++]; const r = unary(); if (o === 'R') v = Math.pow(r, 1 / v); else { if (r > v || r < 0) throw new Error('math'); v = o === 'C' ? fact(v) / (fact(r) * fact(v - r)) : fact(v) / fact(v - r); } } return v; };
+    const unary = () => { if (t[p] === '~') { p++; return -unary(); } return pow(); };
+    const pow = () => { const b = post(); if (t[p] === '^') { p++; return Math.pow(b, unary()); } return b; };
+    const post = () => { let v = prim(); for (;;) { const c = t[p]; if (c === '²') { v = v * v; p++; } else if (c === '³') { v = v * v * v; p++; } else if (c === 'i') { if (v === 0) throw new Error('math'); v = 1 / v; p++; } else if (c === '!') { v = fact(v); p++; } else break; } return v; };
+    const prim = () => {
+      const c = t[p];
+      if (isDig(c)) { let s = ''; while (isDig(t[p])) s += t[p++]; if ((s.match(/\./g) || []).length > 1) throw new Error('syntax'); let v = parseFloat(s);
+        if (t[p] === 'E') { p++; let sg = 1; if (t[p] === '~' || t[p] === '-') { sg = -1; p++; } let e = ''; while (isDig(t[p])) e += t[p++]; if (!e) throw new Error('syntax'); v = v * Math.pow(10, sg * parseInt(e, 10)); }
+        return v; }
+      if (c === '(') { p++; const v = expr(); if (t[p] === ')') p++; return v; }
+      if (funcs[c]) { p++; const v = funcs[c](expr()); if (t[p] === ')') p++; if (isNaN(v)) throw new Error('math'); return v; }
+      if (consts[c] !== undefined) { p++; const v = consts[c]; if (isNaN(v)) throw new Error('math'); return v; }
+      throw new Error('syntax');
+    };
+    if (!t.length) return 0;
+    const v = expr();
+    if (p < t.length) throw new Error('syntax');
+    return v;
+  }
+  inserir(tok) {
+    const st = this.state;
+    let toks = st.toks;
+    const op = ['+', '-', '*', '/', '^', '²', '³', 'i', '!', 'C', 'P', 'R'].includes(tok.i);
+    if (st.fresh) toks = op ? [{ i: 'A', d: 'Ans' }] : [];
+    this.setState({ toks: [...toks, tok], fresh: false, shift: false, msg: '' });
+  }
+  igual() {
+    const st = this.state;
+    const expr = st.toks.map((x) => x.d).join('');
+    try {
+      const v = this.avaliar(st.toks);
+      const r = this.fmt(v);
+      this.setState({ res: r, ans: v, fresh: true, shift: false, hist: [{ e: expr || '0', r }, ...st.hist].slice(0, 6) });
+    } catch (e) {
+      this.setState({ res: e.message === 'math' ? 'Math ERROR' : 'Syntax ERROR', fresh: true, shift: false });
+    }
+  }
+  aperta(id) {
+    const st = this.state;
+    const s = st.shift;
+    if (st.menu) {
+      const m = st.menu; const op = { '1': 0, '2': 1, '3': 2 }[id];
+      if (op === undefined) { this.setState({ menu: null }); return; }
+      if (m === 'mode') { this.setState({ menu: null, sd: op === 1, dados: op === 1 ? st.dados : [], msg: op === 2 ? 'REG: fora do protótipo' : '' }); return; }
+      if (m === 'clr') { this.setState({ menu: null, dados: [], res: '0', msg: 'Stat clear', toks: [] }); return; }
+      if (m === 'svar') { this.setState({ menu: null }); this.inserir([{ i: 'x̄', d: 'x̄' }, { i: 'σn', d: 'xσn' }, { i: 'σs', d: 'xσn-1' }][op]); return; }
+      if (m === 'ssum') { this.setState({ menu: null }); this.inserir([{ i: 'Σx²', d: 'Σx²' }, { i: 'Σx', d: 'Σx' }, { i: 'n', d: 'n' }][op]); return; }
+    }
+    if (id === 'SHIFT') { this.setState({ shift: !s }); return; }
+    if (id === 'AC' || id === 'ON') { this.setState({ toks: [], res: '0', shift: false, fresh: false, msg: '', menu: null }); return; }
+    if (id === 'DEL') { this.setState({ toks: st.fresh ? st.toks : st.toks.slice(0, -1), shift: false }); return; }
+    if (id === '=') { this.igual(); return; }
+    if (id === 'MODE') { this.setState({ menu: s ? 'clr' : 'mode', shift: false }); return; }
+    if (s && st.sd && id === '1') { this.setState({ menu: 'ssum', shift: false }); return; }
+    if (s && st.sd && id === '2') { this.setState({ menu: 'svar', shift: false }); return; }
+    if (id === 'M+') {
+      if (st.sd && !s) {
+        try { const v = st.fresh ? st.ans : this.avaliar(st.toks); const d = [...st.dados, v]; this.setState({ dados: d, toks: [], res: 'n=' + d.length, fresh: false, shift: false, msg: '' }); }
+        catch (e) { this.setState({ res: 'Syntax ERROR', fresh: true }); }
+        return;
+      }
+      this.setState({ msg: 'Memória: fora do protótipo', shift: false }); return;
+    }
+    const mapa = {
+      'x⁻¹': s ? { i: '!', d: '!' } : { i: 'i', d: '⁻¹' },
+      'nCr': s ? { i: 'P', d: 'P' } : { i: 'C', d: 'C' },
+      'x³': s ? { i: 'r(', d: '∛(' } : { i: '³', d: '³' },
+      '√': { i: 'q(', d: '√(' }, 'x²': { i: '²', d: '²' },
+      '^': s ? { i: 'R', d: 'ˣ√' } : { i: '^', d: '^' },
+      'log': s ? { i: 'X(', d: '10^(' } : { i: 'l(', d: 'log(' },
+      'ln': s ? { i: 'Y(', d: 'e^(' } : { i: 'n(', d: 'ln(' },
+      '(−)': { i: '~', d: '−' },
+      'sin': s ? { i: 'S(', d: 'sin⁻¹(' } : { i: 's(', d: 'sin(' },
+      'cos': s ? { i: 'K(', d: 'cos⁻¹(' } : { i: 'c(', d: 'cos(' },
+      'tan': s ? { i: 'T(', d: 'tan⁻¹(' } : { i: 't(', d: 'tan(' },
+      '(': { i: '(', d: '(' }, ')': { i: ')', d: ')' },
+      '+': { i: '+', d: '+' }, '−': { i: '-', d: '-' }, '×': { i: '*', d: '×' }, '÷': { i: '/', d: '÷' },
+      'EXP': s ? { i: 'π', d: 'π' } : { i: 'E', d: 'E' },
+      'Ans': { i: 'A', d: 'Ans' }, '.': { i: '.', d: '.' }
+    };
+    if (/^[0-9]$/.test(id)) { this.inserir({ i: id, d: id }); return; }
+    if (mapa[id]) { this.inserir(mapa[id]); return; }
+    this.setState({ msg: id + ': fora do protótipo', shift: false });
+  }
+  renderVals() {
+    const st = this.state;
+    const mk = (id, label, shift, alpha, estilo, col) => ({ id, label, shift: shift || '', alpha: alpha || '', estilo, col: col || 'auto', aria: label, press: () => this.aperta(id) });
+    const fn = 'background:linear-gradient(#3B3B45,#2A2A32);color:#ECECF3;box-shadow:0 3px 0 #111117';
+    const shiftK = 'background:linear-gradient(#3B3B45,#2A2A32);color:#F5C542;box-shadow:0 3px 0 #111117';
+    const alphaK = 'background:linear-gradient(#3B3B45,#2A2A32);color:#F2606A;box-shadow:0 3px 0 #111117';
+    const num = 'background:linear-gradient(#4A4A55,#383842);color:#FFFFFF;box-shadow:0 4px 0 #15151B';
+    const del = 'background:linear-gradient(#F08A3C,#D46A1E);color:#1A0D02;box-shadow:0 4px 0 #6B3410';
+    const nav = 'background:radial-gradient(circle,#4A4A55,#2A2A32);color:#9A9AB8;box-shadow:0 3px 0 #111117;border-radius:999px';
+    const teclasSup = [
+      mk('SHIFT', 'SHIFT', '', '', shiftK, '1'), mk('ALPHA', 'ALPHA', '', '', alphaK, '2'),
+      mk('REPLAY', '◀ ▲ ▼ ▶', '', '', nav, '3 / span 2'), mk('MODE', 'MODE', 'CLR', '', fn, '5'), mk('ON', 'ON', '', '', fn, '6'),
+      mk('x⁻¹', 'x⁻¹', 'x!', '', fn, '1'), mk('nCr', 'nCr', 'nPr', '', fn, '2'),
+      mk('Pol(', 'Pol(', 'Rec(', ':', fn, '5'), mk('x³', 'x³', '∛', '', fn, '6'),
+      mk('ab/c', 'a b/c', 'd/c', '', fn), mk('√', '√', '', '', fn), mk('x²', 'x²', '', '', fn), mk('^', '^', 'ˣ√', '', fn), mk('log', 'log', '10ˣ', '', fn), mk('ln', 'ln', 'eˣ', 'e', fn),
+      mk('(−)', '(−)', '', 'A', fn), mk('°\'"', '°\'"', '←', 'B', fn), mk('hyp', 'hyp', '', 'C', fn), mk('sin', 'sin', 'sin⁻¹', 'D', fn), mk('cos', 'cos', 'cos⁻¹', 'E', fn), mk('tan', 'tan', 'tan⁻¹', 'F', fn),
+      mk('RCL', 'RCL', 'STO', '', fn), mk('ENG', 'ENG', '←', '', fn), mk('(', '(', '', '', fn), mk(')', ')', '', 'X', fn), mk(',', ',', ';', 'Y', fn), mk('M+', 'M+', 'M−', 'M', fn)
+    ];
+    const teclasInf = [
+      mk('7', '7', '', '', num), mk('8', '8', '', '', num), mk('9', '9', '', '', num), mk('DEL', 'DEL', 'INS', '', del), mk('AC', 'AC', 'OFF', '', del),
+      mk('4', '4', '', '', num), mk('5', '5', '', '', num), mk('6', '6', '', '', num), mk('×', '×', 'nPr', '', num), mk('÷', '÷', '', '', num),
+      mk('1', '1', 'S-SUM', '', num), mk('2', '2', 'S-VAR', '', num), mk('3', '3', '', '', num), mk('+', '+', '%', '', num), mk('−', '−', '', '', num),
+      mk('0', '0', 'Rnd', '', num), mk('.', '.', 'Ran#', '', num), mk('EXP', 'EXP', 'π', '', num), mk('Ans', 'Ans', 'DRG▶', '', num), mk('=', '=', '', '', num)
+    ];
+    const menus = { mode: 'COMP 1  SD 2  REG 3', clr: 'Scl 1  Mode 2  All 3', svar: 'x̄ 1  xσn 2  xσn-1 3', ssum: 'Σx² 1  Σx 2  n 3' };
+    const linha1 = st.menu ? menus[st.menu] : (st.msg || st.toks.map((x) => x.d).join('') || '');
+    return {
+      teclasSup, teclasInf,
+      linha1: linha1 || ' ',
+      linha2: st.menu ? '' : st.res,
+      indS: st.shift ? '1' : '0.15', indSD: st.sd ? '1' : '0.15', indM: '0.15',
+      historico: st.hist, semHistorico: st.hist.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

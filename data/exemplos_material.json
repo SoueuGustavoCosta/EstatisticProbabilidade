@@ -1,0 +1,1032 @@
+{
+ "descricao": "Exemplos resolvidos do material. Viram testes automáticos (api/tests). Quando 'valor_correto' existe, o material tem erro (ver docs/08) e o teste usa valor_correto.",
+ "exemplos": [
+  {
+   "id": "amostragem_sistematica_1000_100",
+   "fonte": "A1 · Amostragem sistemática",
+   "modulo": "amostragem_sistematica",
+   "entrada": {
+    "N": 1000,
+    "n": 100
+   },
+   "esperado_no_material": {
+    "k": 10
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "amostragem_sistematica_360_6",
+   "fonte": "A3 · Exercício 4",
+   "modulo": "amostragem_sistematica",
+   "entrada": {
+    "N": 360,
+    "n": 6,
+    "inicio": 45
+   },
+   "esperado_no_material": {
+    "k": 60,
+    "terceiro_elemento": 165
+   },
+   "tolerancia": 0.01,
+   "obs": "Gabarito não consta no material; deduzido pelo método do A1 (k = N/n, um a cada k)."
+  },
+  {
+   "id": "estratificada_cursos",
+   "fonte": "A1 · Amostragem estratificada",
+   "modulo": "amostragem_estratificada",
+   "entrada": {
+    "estratos": {
+     "Ciência da Computação": 400,
+     "Sistemas de Informação": 300,
+     "ADS": 300
+    },
+    "n": 100
+   },
+   "esperado_no_material": {
+    "Ciência da Computação": 40,
+    "Sistemas de Informação": 30,
+    "ADS": 30
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "estratificada_cidade",
+   "fonte": "AP p.11-12 · Exemplo 1.1",
+   "modulo": "amostragem_estratificada",
+   "entrada": {
+    "estratos": {
+     "A": 50000,
+     "B": 50000,
+     "C": 100000
+    },
+    "n": 500
+   },
+   "esperado_no_material": {
+    "A": 125,
+    "B": 125,
+    "C": 250
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "estratificada_fases",
+   "fonte": "AP p.21 · Fixando U1 Q6",
+   "modulo": "amostragem_estratificada",
+   "entrada": {
+    "estratos": {
+     "Fase 1": 600,
+     "Fase 2": 900,
+     "Fase 3": 500
+    },
+    "n": 80
+   },
+   "esperado_no_material": {
+    "Fase 1": 24,
+    "Fase 2": 36,
+    "Fase 3": 20
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "rol_20_notas",
+   "fonte": "A1 · Rol / AP Exemplo 1.3",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "rol": [
+     33,
+     41,
+     41,
+     49,
+     50,
+     52,
+     56,
+     59,
+     65,
+     66,
+     67,
+     71,
+     74,
+     78,
+     80,
+     81,
+     84,
+     91,
+     94,
+     96
+    ],
+    "n": 20,
+    "minimo": 33,
+    "maximo": 96,
+    "soma": 1328
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "frequencia_classes_20_notas",
+   "fonte": "A1/A4 · Distribuição de frequências / AP Exemplo 1.4",
+   "modulo": "tabela_classes_a_partir_dados",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56
+    ],
+    "classes": [
+     [
+      32,
+      48
+     ],
+     [
+      48,
+      64
+     ],
+     [
+      64,
+      80
+     ],
+     [
+      80,
+      96
+     ]
+    ],
+    "intervalo": "(a,b]"
+   },
+   "esperado_no_material": {
+    "ni": [
+     3,
+     5,
+     7,
+     5
+    ],
+    "fi_percent": [
+     15,
+     25,
+     35,
+     25
+    ]
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "frequencia_classes_chamados",
+   "fonte": "A4 · Exercício tempos de chamados",
+   "modulo": "tabela_classes_a_partir_dados",
+   "entrada": {
+    "valores": [
+     12,
+     18,
+     25,
+     31,
+     22,
+     15,
+     37,
+     41,
+     28,
+     33,
+     19,
+     45,
+     26,
+     38,
+     29,
+     17,
+     35,
+     43,
+     24,
+     32
+    ],
+    "classes": [
+     [
+      10,
+      20
+     ],
+     [
+      20,
+      30
+     ],
+     [
+      30,
+      40
+     ],
+     [
+      40,
+      50
+     ]
+    ],
+    "intervalo": "(a,b]"
+   },
+   "esperado_no_material": {
+    "ni": [
+     5,
+     6,
+     6,
+     3
+    ],
+    "fi_percent": [
+     25,
+     30,
+     30,
+     15
+    ]
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "media_6_a_10",
+   "fonte": "A2 · Média simples",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "soma": 40,
+    "media": 8
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "media_20_notas",
+   "fonte": "A2 / AP Exemplo 2.1",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "media": 66.4
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "media_22_notas",
+   "fonte": "AP Exemplo 2.1 (inclui 82 e 95)",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56,
+     82,
+     95
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "soma": 1505,
+    "media": 68.4
+   },
+   "tolerancia": 0.05,
+   "obs": "Material escreve ≅ 68,4 (1505/22 = 68,409...)"
+  },
+  {
+   "id": "media_ponderada_classes",
+   "fonte": "A2 / AP Exemplo 2.2",
+   "modulo": "tabela_classes",
+   "entrada": {
+    "classes": [
+     [
+      32,
+      48,
+      3
+     ],
+     [
+      48,
+      64,
+      5
+     ],
+     [
+      64,
+      80,
+      7
+     ],
+     [
+      80,
+      96,
+      5
+     ]
+    ],
+    "intervalo": "(a,b]",
+    "dados_inteiros": true
+   },
+   "esperado_no_material": {
+    "pontos_medios": [
+     40.5,
+     56.5,
+     72.5,
+     88.5
+    ],
+    "soma_xi_ni": 1354,
+    "media_ponderada": 67.7
+   },
+   "tolerancia": 0.01,
+   "obs": "Ponto médio pela regra do material: (primeiro inteiro da classe + limite superior)/2. Ver P-01."
+  },
+  {
+   "id": "mediana_impar",
+   "fonte": "A2 · Mediana ímpar",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     12,
+     8,
+     15,
+     10,
+     20
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "rol": [
+     8,
+     10,
+     12,
+     15,
+     20
+    ],
+    "mediana": 12
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "mediana_par",
+   "fonte": "A2 · Mediana par",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     15,
+     20,
+     10,
+     25,
+     30,
+     18
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "rol": [
+     10,
+     15,
+     18,
+     20,
+     25,
+     30
+    ],
+    "mediana": 19
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "mediana_contas_luz",
+   "fonte": "AP Exemplo 2.3",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     465.4,
+     48.56,
+     45.92,
+     156.75,
+     56.75,
+     540.68
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "mediana": 106.75,
+    "amplitude_total": 494.76
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "moda_unimodal",
+   "fonte": "A2 · Moda",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     7,
+     8,
+     9,
+     7,
+     6,
+     7,
+     10
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "moda": [
+     7
+    ],
+    "classificacao": "unimodal"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "moda_bimodal_qualitativa",
+   "fonte": "A2 · Moda bimodal",
+   "modulo": "moda_qualitativa",
+   "entrada": {
+    "categorias": {
+     "Problemas de acesso": 8,
+     "Falha na internet": 5,
+     "Instalação de programas": 8,
+     "Lentidão no computador": 3
+    }
+   },
+   "esperado_no_material": {
+    "moda": [
+     "Problemas de acesso",
+     "Instalação de programas"
+    ],
+    "classificacao": "bimodal"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "moda_amodal",
+   "fonte": "A2 · Amodal",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "moda": [],
+    "classificacao": "amodal"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "moda_salarios",
+   "fonte": "AP Exemplo 2.4",
+   "modulo": "tabela_frequencia",
+   "entrada": {
+    "tabela": [
+     [
+      700,
+      4
+     ],
+     [
+      3500,
+      9
+     ],
+     [
+      9000,
+      3
+     ],
+     [
+      35000,
+      1
+     ]
+    ],
+    "tipo_dados": "populacao"
+   },
+   "esperado_no_material": {
+    "moda": [
+     3500
+    ]
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "at_tempos",
+   "fonte": "A3 · Amplitude total",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     8,
+     10,
+     12,
+     15,
+     20
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "amplitude_total": 12
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "at_rede",
+   "fonte": "A3 · Amplitude total",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     50,
+     55,
+     60,
+     65,
+     90
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "amplitude_total": 40
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "dm_4_6_8_10",
+   "fonte": "A3 · Desvio médio",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     4,
+     6,
+     8,
+     10
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "media": 7,
+    "soma_modulos": 8,
+    "desvio_medio": 2
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "dm_chamados",
+   "fonte": "A3 · Desvio médio",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     10,
+     12,
+     15,
+     18,
+     20
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "media": 15,
+    "soma_modulos": 16,
+    "desvio_medio": 3.2
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "dm_5_10_15_sem_modulo",
+   "fonte": "A3 · Por que o módulo",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     5,
+     10,
+     15
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "media": 10,
+    "soma_sem_modulo": 0,
+    "soma_modulos": 10
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "var_pop_2_a_10",
+   "fonte": "A4 · Variância populacional",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     2,
+     4,
+     6,
+     8,
+     10
+    ],
+    "tipo_dados": "populacao"
+   },
+   "esperado_no_material": {
+    "media": 6,
+    "soma_quadrados": 40,
+    "variancia": 8,
+    "desvio_padrao": 2.83
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "var_amostral_2_a_10",
+   "fonte": "A4 · Variância amostral",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     2,
+     4,
+     6,
+     8,
+     10
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "soma_quadrados": 40,
+    "variancia": 10
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "var_amostral_20_notas",
+   "fonte": "AP Exemplo 3.3 e 3.4",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "soma_quadrados": 6514.8,
+    "variancia": 342.88,
+    "desvio_padrao": 18.52,
+    "intervalo_media_dp": [
+     47.88,
+     84.92
+    ]
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "dm_20_notas",
+   "fonte": "AP Exemplo 3.2",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     84,
+     67,
+     80,
+     33,
+     78,
+     96,
+     49,
+     74,
+     65,
+     41,
+     81,
+     66,
+     50,
+     91,
+     59,
+     71,
+     94,
+     41,
+     52,
+     56
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": null,
+   "tolerancia": 0.01,
+   "valor_correto": {
+    "desvio_medio": 15.2
+   },
+   "erro_material": "E-06: material não traz o resultado (erro de diagramação)."
+  },
+  {
+   "id": "a5_ex1",
+   "fonte": "A5 · Atividade 1 (resultados no slide)",
+   "modulo": "dados_brutos",
+   "entrada": {
+    "valores": [
+     4,
+     6,
+     8,
+     10,
+     12
+    ],
+    "tipo_dados": "amostra"
+   },
+   "esperado_no_material": {
+    "media": 8,
+    "amplitude_total": 8,
+    "variancia": 10,
+    "desvio_padrao": 3.16
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "pearson2_ex41",
+   "fonte": "AP Exemplo 4.1",
+   "modulo": "pearson2",
+   "entrada": {
+    "media": 20,
+    "mediana": 26,
+    "variancia": 9
+   },
+   "esperado_no_material": {
+    "desvio_padrao": 3,
+    "As": -6,
+    "classificacao": "assimetrica negativa"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "momento_2_3_4",
+   "fonte": "AP Exemplo 4.2",
+   "modulo": "momento_assimetria",
+   "entrada": {
+    "valores": [
+     2,
+     3,
+     4
+    ]
+   },
+   "esperado_no_material": {
+    "media": 3,
+    "desvio_padrao": 0.82,
+    "As": 1.21
+   },
+   "tolerancia": 0.01,
+   "valor_correto": {
+    "soma_cubos": 0,
+    "As": 0,
+    "classificacao": "simetrica"
+   },
+   "erro_material": "E-01"
+  },
+  {
+   "id": "quartil_2_3_4_1_2",
+   "fonte": "AP Exemplo 4.3",
+   "modulo": "coef_quartil",
+   "entrada": {
+    "valores": [
+     2,
+     3,
+     4,
+     1,
+     2
+    ]
+   },
+   "esperado_no_material": {
+    "mediana": 2,
+    "Q1": 1.5,
+    "Q3": 3.5,
+    "As": 1.5
+   },
+   "tolerancia": 0.01,
+   "valor_correto": {
+    "mediana": 2,
+    "Q1": 1.5,
+    "Q3": 3.5,
+    "As": 0.5,
+    "classificacao": "assimetrica positiva"
+   },
+   "erro_material": "E-02"
+  },
+  {
+   "id": "prob_dado",
+   "fonte": "AP Exemplo 5.3",
+   "modulo": "prob_classica",
+   "entrada": {
+    "favoraveis": [
+     3,
+     3,
+     2
+    ],
+    "total": 6
+   },
+   "esperado_no_material": {
+    "P": [
+     "1/2",
+     "1/2",
+     "1/3"
+    ]
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "condicional_sem_reposicao",
+   "fonte": "AP Exemplo 5.4",
+   "modulo": "prob_condicional",
+   "entrada": {
+    "P_A_inter_B": "1/10*4/9",
+    "P_B": "1/10"
+   },
+   "esperado_no_material": {
+    "P_A_dado_B": "4/9"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "independencia_com_reposicao",
+   "fonte": "AP Exemplo 5.5",
+   "modulo": "prob_classica",
+   "entrada": {
+    "favoraveis": 5,
+    "total": 10
+   },
+   "esperado_no_material": {
+    "P": "1/2"
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "bayes_calcados",
+   "fonte": "AP Exemplo 5.6",
+   "modulo": "bayes",
+   "entrada": {
+    "eventos": {
+     "A": {
+      "P": 0.6,
+      "P_D_dado": 0.7
+     },
+     "B": {
+      "P": 0.4,
+      "P_D_dado": 0.3
+     }
+    },
+    "alvo": "A"
+   },
+   "esperado_no_material": {
+    "numerador": 0.42,
+    "denominador": 0.54,
+    "P_A_dado_D": 0.78
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "binomial_prova",
+   "fonte": "AP Exemplo 6.1",
+   "modulo": "binomial",
+   "entrada": {
+    "n": 6,
+    "p": "1/5",
+    "k": 3
+   },
+   "esperado_no_material": {
+    "combinacao": 20,
+    "P": 0.08
+   },
+   "tolerancia": 0.005,
+   "obs": "Valor exato 1280/15625 = 0,08192"
+  },
+  {
+   "id": "normal_lampada",
+   "fonte": "AP Exemplo 6.2",
+   "modulo": "normal",
+   "entrada": {
+    "mu": 2000,
+    "sigma": 200,
+    "a": 2000,
+    "b": 2400
+   },
+   "esperado_no_material": {
+    "z_a": 0,
+    "z_b": 2,
+    "P": 0.4772,
+    "P_percent": 42.72
+   },
+   "tolerancia": 0.01,
+   "valor_correto": {
+    "P": 0.4772,
+    "P_percent": 47.72
+   },
+   "erro_material": "E-03"
+  },
+  {
+   "id": "normal_salario",
+   "fonte": "AP Fixando U6 Q7",
+   "modulo": "normal",
+   "entrada": {
+    "mu": 80,
+    "sigma": 5,
+    "a": 80,
+    "b": 85
+   },
+   "esperado_no_material": {
+    "P_percent": 34.13
+   },
+   "tolerancia": 0.01
+  },
+  {
+   "id": "normal_diametro",
+   "fonte": "AP Fixando U6 Q8",
+   "modulo": "normal",
+   "entrada": {
+    "mu": 100,
+    "variancia": 0.04,
+    "a": 99.98,
+    "b": 100.04
+   },
+   "esperado_no_material": {
+    "z_a": -0.1,
+    "z_b": 0.2,
+    "P_percent": 11.91
+   },
+   "tolerancia": 0.01
+  }
+ ]
+}

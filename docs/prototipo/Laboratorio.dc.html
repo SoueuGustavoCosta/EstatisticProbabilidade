@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Laboratório — entrada de dados</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F5F7}
+a{color:#0066CC}a:hover{color:#004E9E}
+.nav{text-decoration:none;color:#424245}
+.nav:hover{color:#1D1D1F}
+.b{cursor:pointer;transition:background .15s ease, transform .1s ease}
+.b:active{transform:scale(.98)}
+.b:focus-visible,textarea:focus-visible{outline:2px solid #0071E3;outline-offset:2px}
+.res{text-decoration:none;color:#1D1D1F;transition:box-shadow .15s ease}
+.res:hover{box-shadow:0 0 0 2px #0071E3}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F5F5F7; color: #1D1D1F; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased">
+
+  <header style="background: rgba(255,255,255,.85); border-bottom: 1px solid #E8E8ED">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+      <a href="Main.dc.html" class="nav" style="font-weight: 600; font-size: 17px; color: #1D1D1F">Estatística</a>
+      <nav aria-label="Principal" style="display: flex; gap: 28px; font-size: 14px">
+        <a href="Main.dc.html" class="nav">Início</a>
+        <a href="Trilha.dc.html" class="nav">Trilhas</a>
+        <a href="Calculadora.dc.html" class="nav">Calculadora</a>
+        <a href="Laboratorio.dc.html" class="nav" style="color: #1D1D1F; font-weight: 600">Laboratório</a>
+      </nav>
+      <span style="font-size: 13px; color: #6E6E73">Dados brutos</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 72px; display: flex; flex-direction: column; gap: 24px">
+    <div>
+      <h1 style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -.025em">Laboratório</h1>
+      <p style="margin: 6px 0 0; color: #6E6E73; font-size: 17px">Digite os valores, escolha população ou amostra e calcule. Cada passo aparece completo, com as teclas da calculadora.</p>
+    </div>
+
+    <div role="tablist" aria-label="Tipo de cálculo" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{modulos}}" as="m" hint-placeholder-count="8">
+        <span role="tab" aria-selected="{{m.sel}}" style="padding: 8px 16px; border-radius: 980px; font-size: 14px; font-weight: 500; {{m.estilo}}">{{m.nome}}</span>
+      </sc-for>
+    </div>
+
+    <section aria-label="Entrada de dados" style="background: #FFFFFF; border-radius: 22px; padding: 28px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end">
+      <label style="flex: 999 1 420px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600">
+        Valores
+        <textarea rows="3" value="{{texto}}" onChange="{{digitar}}" placeholder="Ex.: 84 67 80 33 78" style="font: 500 17px JetBrains Mono, monospace; padding: 14px 16px; border-radius: 14px; border: 1px solid #D2D2D7; background: #FBFBFD; color: #1D1D1F; resize: vertical"></textarea>
+        <span style="font-weight: 400; color: #6E6E73; font-size: 13px">Separe por espaço, ponto e vírgula, traço ou vírgula seguida de espaço. Decimal com vírgula: 56,75.</span>
+      </label>
+      <div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 14px; font-weight: 600">Os dados são</span>
+          <div role="radiogroup" aria-label="Os dados são" style="display: flex; background: #F0F0F3; border-radius: 12px; padding: 3px">
+            <button type="button" role="radio" aria-checked="{{ehPop}}" class="b" onClick="{{usarPop}}" style="flex: 1; border: 0; border-radius: 10px; padding: 10px; font: 500 15px Inter, sans-serif; {{estiloPop}}">População</button>
+            <button type="button" role="radio" aria-checked="{{ehAmo}}" class="b" onClick="{{usarAmo}}" style="flex: 1; border: 0; border-radius: 10px; padding: 10px; font: 500 15px Inter, sans-serif; {{estiloAmo}}">Amostra</button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px">
+          <button type="button" class="b" onClick="{{calcular}}" style="flex: 1; padding: 14px; border-radius: 980px; border: 0; background: #0071E3; color: #FFFFFF; font: 600 17px Inter, sans-serif">Calcular</button>
+          <button type="button" class="b" onClick="{{exemplo}}" style="padding: 14px 18px; border-radius: 980px; border: 0; background: #F0F0F3; color: #0066CC; font: 500 15px Inter, sans-serif">Exemplo do material</button>
+        </div>
+      </div>
+      <sc-if value="{{erro}}" hint-placeholder-val="{{ false }}">
+        <div role="alert" style="flex: 1 1 100%; background: #FDECEC; color: #A1000F; border-radius: 12px; padding: 12px 14px; font-size: 15px">{{erroTexto}}</div>
+      </sc-if>
+    </section>
+
+    <sc-if value="{{temRes}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 24px">
+
+        <section aria-labelledby="resultados" style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px">
+            <h2 id="resultados" style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -.02em">Resultados</h2>
+            <span style="font-size: 14px; color: #6E6E73">{{rotuloTipo}} · {{origem}}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px">
+            <sc-for list="{{resultados}}" as="r" hint-placeholder-count="11">
+              <a href="{{r.ancora}}" class="res" style="background: #FFFFFF; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 4px">
+                <span style="font-size: 13px; color: #6E6E73">{{r.nome}}</span>
+                <span style="font-size: 28px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums">{{r.valor}}</span>
+                <span style="font-size: 13px; color: #0066CC; font-family: JetBrains Mono, monospace">{{r.simbolo}}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section aria-labelledby="grafico" style="background: #FFFFFF; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: baseline">
+            <h2 id="grafico" style="margin: 0; font-size: 22px; font-weight: 600">Valores em ordem (rol)</h2>
+            <div style="display: flex; gap: 16px; font-size: 13px; color: #424245">
+              <span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 3px; background: #0071E3; border-radius: 2px"></span>Média {{mediaTxt}}</span>
+              <span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 0; border-top: 3px dashed #C93400"></span>Mediana {{medianaTxt}}</span>
+            </div>
+          </div>
+          <div role="img" aria-label="{{graficoAria}}" style="position: relative; height: 260px; display: flex; align-items: flex-end; gap: 6px; border-bottom: 1px solid #D2D2D7; padding: 0 4px">
+            <sc-for list="{{barras}}" as="b" hint-placeholder-count="20">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px">
+                <span style="font-size: 11px; color: #6E6E73; font-variant-numeric: tabular-nums">{{b.txt}}</span>
+                <div style="width: 100%; max-width: 40px; height: {{b.h}}; background: #B9D7F7; border-radius: 6px 6px 2px 2px"></div>
+              </div>
+            </sc-for>
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: {{mediaPos}}; border-top: 3px solid #0071E3"></div>
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: {{medianaPos}}; border-top: 3px dashed #C93400"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="passos" style="display: flex; flex-direction: column; gap: 14px">
+          <h2 id="passos" style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -.02em">Passo a passo</h2>
+          <sc-for list="{{passos}}" as="p" hint-placeholder-count="11">
+            <article id="{{p.id}}" style="background: #FFFFFF; border-radius: 22px; padding: 26px; display: flex; flex-wrap: wrap; gap: 24px">
+              <div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+                  <span style="width: 30px; height: 30px; border-radius: 50%; background: #0071E3; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex: none">{{p.n}}</span>
+                  <h3 style="margin: 0; font-size: 20px; font-weight: 600">{{p.titulo}}</h3>
+                  <span style="font-size: 12px; color: #6E6E73; margin-left: auto">{{p.fonte}}</span>
+                </div>
+                <sc-if value="{{p.temFormula}}" hint-placeholder-val="{{ true }}">
+                  <div style="align-self: flex-start; font-family: JetBrains Mono, monospace; font-size: 18px; background: #F5F5F7; border-radius: 12px; padding: 12px 16px">{{p.formula}}</div>
+                </sc-if>
+                <sc-for list="{{p.linhas}}" as="l" hint-placeholder-count="2">
+                  <div style="font-family: JetBrains Mono, monospace; font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; color: #1D1D1F">{{l.t}}</div>
+                </sc-for>
+                <sc-if value="{{p.temTabela}}" hint-placeholder-val="{{ false }}">
+                  <div style="overflow-x: auto; border: 1px solid #E8E8ED; border-radius: 14px; max-height: 420px; overflow-y: auto">
+                    <table style="border-collapse: collapse; width: 100%; font-family: JetBrains Mono, monospace; font-size: 14px; text-align: center">
+                      <thead><tr style="background: #F5F5F7; font-family: Inter, sans-serif; font-size: 12px; color: #6E6E73"><th style="padding: 10px; font-weight: 600">{{p.cab.a}}</th><th style="padding: 10px; font-weight: 600">{{p.cab.b}}</th><th style="padding: 10px; font-weight: 600">{{p.cab.c}}</th></tr></thead>
+                      <tbody>
+                        <sc-for list="{{p.tabela}}" as="r" hint-placeholder-count="5">
+                          <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 8px">{{r.a}}</td><td style="padding: 8px">{{r.b}}</td><td style="padding: 8px; color: #0066CC">{{r.c}}</td></tr>
+                        </sc-for>
+                        <tr style="border-top: 1px solid #E8E8ED; background: #F5F5F7; font-weight: 600"><td style="padding: 10px; font-family: Inter, sans-serif">Total</td><td></td><td style="padding: 10px">{{p.total}}</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </sc-if>
+                <div style="font-size: 20px; font-weight: 600; color: #0066CC; font-variant-numeric: tabular-nums">{{p.resultado}}</div>
+                <sc-if value="{{p.temInterp}}" hint-placeholder-val="{{ true }}">
+                  <p style="margin: 0; font-size: 15px; color: #424245; line-height: 1.5">{{p.interp}}</p>
+                </sc-if>
+                <sc-if value="{{p.temDica}}" hint-placeholder-val="{{ false }}">
+                  <div style="background: #FFF4E5; color: #8A4B00; border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 1.5"><b>Dica · </b>{{p.dica}}</div>
+                </sc-if>
+              </div>
+              <sc-if value="{{p.temCalc}}" hint-placeholder-val="{{ true }}">
+                <div style="flex: 1 1 260px; max-width: 320px; display: flex; flex-direction: column; gap: 10px">
+                  <div style="background: #2B2B31; border-radius: 16px; padding: 10px">
+                    <div style="display: flex; justify-content: space-between; font-size: 10px; color: #C9C9D6; padding: 0 2px 6px; font-weight: 700"><span>CASIO</span><span>fx-82MS</span></div>
+                    <div style="background: #C3CFAE; border-radius: 6px; padding: 8px 10px; color: #1C2414; font-family: JetBrains Mono, monospace; min-height: 58px; display: flex; flex-direction: column; justify-content: space-between">
+                      <span style="font-size: 12px; overflow-wrap: anywhere">{{p.display1}}</span>
+                      <span style="font-size: 22px; text-align: right; font-weight: 600">{{p.display2}}</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 5px">
+                    <sc-for list="{{p.teclas}}" as="k" hint-placeholder-count="6">
+                      <span style="min-width: 28px; height: 28px; padding: 0 6px; box-sizing: border-box; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; font: 600 13px JetBrains Mono, monospace; {{k.estilo}}">{{k.r}}</span>
+                    </sc-for>
+                  </div>
+                  <button type="button" class="b" onClick="{{p.tocar}}" style="align-self: flex-start; padding: 8px 16px; border-radius: 980px; border: 0; background: #F0F0F3; color: #0066CC; font: 500 14px Inter, sans-serif">Reproduzir teclas</button>
+                </div>
+              </sc-if>
+            </article>
+          </sc-for>
+        </section>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.exemploTxt = '84 – 67 – 80 – 33 – 78 – 96 – 49 – 74 – 65 – 41 – 81 – 66 – 50 – 91 – 59 – 71 – 94 – 41 – 52 – 56';
+    this.state = { texto: this.exemploTxt, tipo: 'amostra', dados: null, erro: '', origem: 'Exemplo do material: notas de 20 alunos (Aula 01 / Apostila 1.3)', play: null, pp: -1 };
+    this.timer = null;
+  }
+  componentDidMount() { this.calcular(); }
+  componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
+  ler(txt) {
+    const partes = txt.replace(/\s[–—-]\s/g, ' ').split(/;|\s+|,\s+/).map((x) => x.trim()).filter(Boolean);
+    const vals = partes.map((x) => Number(x.replace(',', '.')));
+    if (!vals.length) return { erro: 'Digite pelo menos dois valores.' };
+    if (vals.some((v) => isNaN(v))) return { erro: 'Algum valor não é um número. Confira a separação e use vírgula só para decimal.' };
+    if (vals.length < 2) return { erro: 'Digite pelo menos dois valores.' };
+    return { vals };
+  }
+  calcular(origem) {
+    const r = this.ler(this.state.texto);
+    if (r.erro) { this.setState({ erro: r.erro }); return; }
+    this.setState({ dados: r.vals, erro: '', play: null, pp: -1, origem: origem || this.state.origem });
+  }
+  num(v) {
+    const r = Math.round(v * 100) / 100;
+    const s = (Object.is(r, -0) ? 0 : r).toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+    return s;
+  }
+  aprox(v) {
+    const exato = Math.abs(Math.round(v * 100) / 100 - v) < 1e-9;
+    return (exato ? '= ' : '≅ ') + this.num(v);
+  }
+  casio(v) { return parseFloat(v.toPrecision(10)).toString(); }
+  teclasNum(v) {
+    const s = (Math.round(v * 100) / 100).toString();
+    const out = [];
+    for (const c of s) out.push(c === '-' ? '(−)' : c);
+    return out;
+  }
+  renderVals() {
+    const st = this.state;
+    const pop = st.tipo === 'pop';
+    const estAtivo = 'background:#FFFFFF;color:#1D1D1F;box-shadow:0 1px 4px rgba(0,0,0,.12)';
+    const estInativo = 'background:transparent;color:#6E6E73';
+    const modNomes = ['Dados brutos', 'Tabela de frequência', 'Tabela com classes', 'Montar classes', 'Amostragem', 'Probabilidade', 'Binomial', 'Normal'];
+    const modulos = modNomes.map((nome, j) => ({ nome, sel: j === 0 ? 'true' : 'false', estilo: j === 0 ? 'background:#1D1D1F;color:#FFFFFF' : 'background:#FFFFFF;color:#424245' }));
+    const base = {
+      modulos, texto: st.texto,
+      digitar: (e) => this.setState({ texto: e.target.value }),
+      usarPop: () => this.setState({ tipo: 'pop' }, () => this.calcular()),
+      usarAmo: () => this.setState({ tipo: 'amostra' }, () => this.calcular()),
+      calcular: () => this.calcular('Seus dados'),
+      exemplo: () => this.setState({ texto: this.exemploTxt, tipo: 'amostra' }, () => this.calcular('Exemplo do material: notas de 20 alunos (Aula 01 / Apostila 1.3)')),
+      ehPop: pop ? 'true' : 'false', ehAmo: pop ? 'false' : 'true',
+      estiloPop: pop ? estAtivo : estInativo, estiloAmo: pop ? estInativo : estAtivo,
+      erro: !!st.erro, erroTexto: st.erro,
+      origem: st.origem, rotuloTipo: pop ? 'População' : 'Amostra'
+    };
+    if (!st.dados) return { ...base, temRes: false, resultados: [], barras: [], passos: [] };
+
+    const x = st.dados;
+    const n = x.length;
+    const rol = [...x].sort((a, b) => a - b);
+    const soma = x.reduce((a, b) => a + b, 0);
+    const media = soma / n;
+    const mediana = n % 2 ? rol[(n - 1) / 2] : (rol[n / 2 - 1] + rol[n / 2]) / 2;
+    const cont = new Map();
+    rol.forEach((v) => cont.set(v, (cont.get(v) || 0) + 1));
+    const maxF = Math.max(...cont.values());
+    const modas = maxF === 1 || [...cont.values()].every((c) => c === maxF) ? [] : [...cont.entries()].filter(([, c]) => c === maxF).map(([v]) => v);
+    const classe = modas.length === 0 ? 'amodal' : modas.length === 1 ? 'unimodal' : modas.length === 2 ? 'bimodal' : 'multimodal';
+    const min = rol[0], max = rol[n - 1], at = max - min;
+    const absd = x.map((v) => Math.abs(v - media));
+    const somaAbs = absd.reduce((a, b) => a + b, 0);
+    const dm = somaAbs / n;
+    const quad = x.map((v) => (v - media) * (v - media));
+    const somaQ = quad.reduce((a, b) => a + b, 0);
+    const div = pop ? n : n - 1;
+    const vari = somaQ / div;
+    const dp = Math.sqrt(vari);
+    const sV = pop ? 'σ²' : 's²';
+    const sD = pop ? 'σ' : 's';
+    const N = (v) => this.num(v);
+    const lista = (arr) => arr.map(N).join(' – ');
+
+    const resultados = [
+      { nome: 'Quantidade', valor: String(n), simbolo: 'n', ancora: '#p3' },
+      { nome: 'Soma', valor: N(soma), simbolo: 'Σx', ancora: '#p4' },
+      { nome: 'Média', valor: N(media), simbolo: 'x̄', ancora: '#p5' },
+      { nome: 'Mediana', valor: N(mediana), simbolo: 'Me', ancora: '#p6' },
+      { nome: 'Moda', valor: modas.length ? modas.map(N).join(' e ') : '—', simbolo: 'Mo · ' + classe, ancora: '#p7' },
+      { nome: 'Menor valor', valor: N(min), simbolo: 'x mín', ancora: '#p8' },
+      { nome: 'Maior valor', valor: N(max), simbolo: 'x máx', ancora: '#p8' },
+      { nome: 'Amplitude total', valor: N(at), simbolo: 'AT', ancora: '#p8' },
+      { nome: 'Desvio médio', valor: N(dm), simbolo: 'dm', ancora: '#p9' },
+      { nome: pop ? 'Variância populacional' : 'Variância amostral', valor: N(vari), simbolo: sV, ancora: '#p10' },
+      { nome: 'Desvio padrão', valor: N(dp), simbolo: sD, ancora: '#p11' }
+    ];
+
+    const topo = max > 0 ? max : 1;
+    const pct = (v) => Math.round(Math.max(0, Math.min(1, v / topo)) * 210) + 'px';
+    const barras = rol.map((v) => ({ txt: N(v), h: pct(v) }));
+
+    const mk = (o) => ({ temFormula: !!o.formula, temTabela: !!o.tabela, temInterp: !!o.interp, temDica: !!o.dica, temCalc: !!(o.teclas && o.teclas.length), linhas: [], tabela: [], cab: { a: '', b: '', c: '' }, total: '', ...o, linhas: (o.linhas || []).map((t) => ({ t })) });
+    const sumKeys = (arr) => { const k = []; arr.forEach((v, j) => { if (j) k.push('+'); k.push(...this.teclasNum(v)); }); return k; };
+    const passos = [
+      mk({ titulo: 'Dados brutos', fonte: 'Aula 01 · Sumarização', linhas: [lista(x)], resultado: n + ' valores digitados', interp: 'Dados brutos são os valores como foram coletados, sem organização.' }),
+      mk({ titulo: 'Rol', fonte: 'Aula 01 · Rol', linhas: [lista(rol)], resultado: 'Ordem crescente', interp: 'Organizar antes é obrigatório para a mediana e facilita achar o menor e o maior valor.' }),
+      mk({ titulo: 'Quantidade de valores', fonte: 'Aula 02 · Média', formula: 'n = quantidade de valores', linhas: ['Contando os valores do rol: x₁ até x' + n], resultado: 'n = ' + n }),
+      mk({ titulo: 'Soma dos valores', fonte: 'Apostila p.24 · Glossário Σ', formula: 'Σx = x₁ + x₂ + … + xₙ', linhas: [x.map(N).join(' + ')], resultado: 'Σx ' + this.aprox(soma), teclas: [...sumKeys(x), '='], calc: soma }),
+      mk({ titulo: 'Média aritmética', fonte: 'Aula 02 · Média simples', formula: 'x̄ = Σx ÷ n', linhas: ['x̄ = ' + N(soma) + ' ÷ ' + n], resultado: 'x̄ ' + this.aprox(media), interp: 'Em média, os valores ficaram em ' + N(media) + '.', teclas: [...this.teclasNum(soma), '÷', ...this.teclasNum(n), '='], calc: soma / n }),
+      mk({ titulo: 'Mediana', fonte: 'Aula 02 · Mediana', formula: n % 2 ? 'Me = x₍ₙ₊₁₎/₂ (n ímpar)' : 'Me = (xₙ/₂ + xₙ/₂₊₁) ÷ 2 (n par)',
+        linhas: n % 2 ? ['n = ' + n + ' é ímpar → posição (' + n + ' + 1) ÷ 2 = ' + ((n + 1) / 2), 'No rol, o ' + ((n + 1) / 2) + 'º valor é ' + N(mediana)]
+          : ['n = ' + n + ' é par → valores centrais nas posições ' + (n / 2) + ' e ' + (n / 2 + 1), 'No rol: ' + N(rol[n / 2 - 1]) + ' e ' + N(rol[n / 2]), 'Me = (' + N(rol[n / 2 - 1]) + ' + ' + N(rol[n / 2]) + ') ÷ 2'],
+        resultado: 'Me ' + this.aprox(mediana), interp: 'Metade dos valores fica antes da mediana e a outra metade depois.',
+        teclas: n % 2 ? [] : ['(', ...this.teclasNum(rol[n / 2 - 1]), '+', ...this.teclasNum(rol[n / 2]), ')', '÷', '2', '='], calc: mediana }),
+      mk({ titulo: 'Moda', fonte: 'Aula 02 · Moda', formula: 'Mo = valor que mais se repete',
+        linhas: [[...cont.entries()].filter(([, c]) => c > 1).map(([v, c]) => N(v) + ' aparece ' + c + ' vezes').join(' · ') || 'Nenhum valor se repete.', modas.length ? 'Maior frequência: ' + maxF + ' vezes' : 'Nenhum valor se destaca como o mais frequente.'],
+        resultado: modas.length ? 'Mo = ' + modas.map(N).join(' e ') + ' (' + classe + ')' : 'Sem moda (amodal)',
+        dica: 'Unimodal: uma moda · Bimodal: duas · Multimodal: três ou mais · Amodal: nenhuma.' }),
+      mk({ titulo: 'Amplitude total', fonte: 'Aula 03 · Amplitude total', formula: 'AT = x máx − x mín', linhas: ['Maior valor: ' + N(max) + ' · Menor valor: ' + N(min), 'AT = ' + N(max) + ' − ' + N(min)], resultado: 'AT ' + this.aprox(at), interp: 'Diferença de ' + N(at) + ' entre o maior e o menor valor.', teclas: [...this.teclasNum(max), '−', ...this.teclasNum(min), '='], calc: at, dica: 'A amplitude total só olha os dois extremos.' }),
+      mk({ titulo: 'Desvio médio', fonte: 'Aula 03 · Desvio médio', formula: 'dm = Σ|xᵢ − x̄| ÷ n',
+        cab: { a: 'xᵢ', b: 'xᵢ − x̄', c: '|xᵢ − x̄|' },
+        tabela: x.map((v) => ({ a: N(v), b: N(v) + ' − ' + N(media) + ' = ' + N(v - media), c: N(Math.abs(v - media)) })), total: N(somaAbs),
+        linhas: ['dm = ' + N(somaAbs) + ' ÷ ' + n], resultado: 'dm ' + this.aprox(dm),
+        interp: 'Em média, os valores se afastam ' + N(dm) + ' da média ' + N(media) + '.', dica: 'O módulo impede que diferenças positivas e negativas se anulem.',
+        teclas: [...this.teclasNum(somaAbs), '÷', ...this.teclasNum(n), '='], calc: dm }),
+      mk({ titulo: pop ? 'Variância populacional' : 'Variância amostral', fonte: pop ? 'Aula 04 · Variância Populacional' : 'Aula 04 · Variância Amostral',
+        formula: sV + ' = Σ(xᵢ − x̄)² ÷ ' + (pop ? 'n' : '(n − 1)'),
+        cab: { a: 'xᵢ', b: 'xᵢ − x̄', c: '(xᵢ − x̄)²' },
+        tabela: x.map((v) => ({ a: N(v), b: N(v) + ' − ' + N(media) + ' = ' + N(v - media), c: N((v - media) * (v - media)) })), total: N(somaQ),
+        linhas: pop ? [sV + ' = ' + N(somaQ) + ' ÷ ' + n] : [sV + ' = ' + N(somaQ) + ' ÷ (' + n + ' − 1)', sV + ' = ' + N(somaQ) + ' ÷ ' + (n - 1)],
+        resultado: sV + ' ' + this.aprox(vari), interp: 'A unidade da variância fica ao quadrado.',
+        dica: pop ? 'Todos os elementos da população: divide por n.' : 'Amostra: divide por n − 1 (correção de Bessel).',
+        teclas: pop ? [...this.teclasNum(somaQ), '÷', ...this.teclasNum(n), '='] : [...this.teclasNum(somaQ), '÷', '(', ...this.teclasNum(n), '−', '1', ')', '='], calc: vari }),
+      mk({ titulo: 'Desvio padrão', fonte: 'Aula 05 · Desvio padrão', formula: sD + ' = √' + sV, linhas: [sD + ' = √' + N(vari)], resultado: sD + ' ' + this.aprox(dp),
+        interp: 'Na mesma unidade dos dados. Os valores se concentram em [' + N(media - dp) + ' ; ' + N(media + dp) + '].',
+        dica: 'Isso não quer dizer que média ± desvio dá o maior e o menor valor (Apostila p.34).',
+        teclas: ['√', ...this.teclasNum(vari), '='], calc: dp })
+    ].map((p, j) => {
+      const id = 'p' + (j + 1);
+      const ativo = st.play === j;
+      const nk = p.teclas ? p.teclas.length : 0;
+      const pp = ativo ? st.pp : -1;
+      const teclas = (p.teclas || []).map((t, k) => ({ r: t, estilo: (ativo && k === pp) ? 'background:#0071E3;color:#FFFFFF' : ((ativo && k < pp) ? 'background:#F5F5F7;color:#AEAEB2' : 'background:#F5F5F7;color:#1D1D1F') }));
+      const fim = !ativo || pp >= nk - 1;
+      const typed = (ativo ? p.teclas.slice(0, pp + 1) : p.teclas || []).map((t) => t === '(−)' ? '−' : t).join('');
+      const tocar = () => {
+        if (this.timer) clearInterval(this.timer);
+        this.setState({ play: j, pp: 0 });
+        this.timer = setInterval(() => {
+          const np = this.state.pp + 1;
+          if (np >= nk) { clearInterval(this.timer); this.timer = null; return; }
+          this.setState({ pp: np });
+        }, 260);
+      };
+      return { ...p, id, n: j + 1, teclas, tocar, display1: typed || ' ', display2: fim && p.calc !== undefined ? this.casio(p.calc) : '0' };
+    });
+
+    return {
+      ...base, temRes: true, resultados, barras, passos,
+      mediaTxt: N(media), medianaTxt: N(mediana),
+      mediaPos: pct(media), medianaPos: pct(mediana),
+      graficoAria: 'Gráfico de barras com ' + n + ' valores em ordem crescente, de ' + N(min) + ' a ' + N(max) + '. Média ' + N(media) + ', mediana ' + N(mediana) + '.'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Trilha 10 — Variância e desvio padrão</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F5F7}
+a{color:#0066CC}a:hover{color:#004E9E}
+.nav{text-decoration:none;color:#424245}
+.nav:hover{color:#1D1D1F}
+.b{cursor:pointer;transition:background .15s ease, transform .1s ease}
+.b:active{transform:scale(.98)}
+.b:focus-visible{outline:2px solid #0071E3;outline-offset:2px}
+.step:hover{background:#F0F0F3}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F5F5F7; color: #1D1D1F; font-family: Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased">
+
+  <header style="background: rgba(255,255,255,.85); border-bottom: 1px solid #E8E8ED">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+      <a href="Main.dc.html" class="nav" style="font-weight: 600; font-size: 17px; color: #1D1D1F">Estatística</a>
+      <nav aria-label="Principal" style="display: flex; gap: 28px; font-size: 14px">
+        <a href="Main.dc.html" class="nav">Início</a>
+        <a href="Trilha.dc.html" class="nav" style="color: #1D1D1F; font-weight: 600">Trilhas</a>
+        <a href="Calculadora.dc.html" class="nav">Calculadora</a>
+        <a href="Laboratorio.dc.html" class="nav">Laboratório</a>
+      </nav>
+      <span style="font-size: 13px; color: #6E6E73">{{xp}} XP</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <a href="Main.dc.html" style="font-size: 14px; text-decoration: none">‹ Todas as trilhas</a>
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+        <div>
+          <span style="font-size: 14px; color: #6E6E73">Trilha 10 · Aulas 04 e 05</span>
+          <h1 style="margin: 2px 0 0; font-size: 40px; font-weight: 700; letter-spacing: -.025em">Variância e desvio padrão</h1>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 220px">
+          <span style="font-size: 13px; color: #6E6E73">{{numCard}} de {{totalCards}}</span>
+          <span style="width: 220px; height: 6px; background: #E8E8ED; border-radius: 99px; overflow: hidden"><span style="display: block; height: 6px; width: {{progresso}}; background: #0071E3; border-radius: 99px"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+      <nav aria-label="Etapas da trilha" style="flex: 1 1 240px; max-width: 270px; background: #FFFFFF; border-radius: 18px; padding: 10px; display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{etapas}}" as="e" hint-placeholder-count="8">
+          <button type="button" class="b step" onClick="{{e.ir}}" style="display: flex; align-items: center; gap: 12px; text-align: left; border: 0; border-radius: 12px; padding: 11px 12px; font: 500 15px Inter, sans-serif; color: #1D1D1F; background: {{e.fundo}}">
+            <span style="width: 24px; height: 24px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; {{e.marca}}">{{e.simbolo}}</span>
+            <span style="line-height: 1.3">{{e.titulo}}</span>
+          </button>
+        </sc-for>
+      </nav>
+
+      <section aria-label="Conteúdo" style="flex: 999 1 520px; min-width: 0; background: #FFFFFF; border-radius: 22px; padding: 36px; display: flex; flex-direction: column; gap: 22px; min-height: 560px; box-sizing: border-box">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: baseline">
+          <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.02em">{{card.titulo}}</h2>
+          <span style="font-size: 13px; color: #6E6E73">Fonte: {{card.fonte}}</span>
+        </div>
+        <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #424245">{{card.texto}}</p>
+
+        <sc-if value="{{c0}}" hint-placeholder-val="{{ true }}">
+          <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+            <li style="display: flex; gap: 14px; align-items: center; font-size: 17px; background: #F5F5F7; border-radius: 14px; padding: 14px 16px"><b style="color: #0066CC; width: 20px">1</b>Calcular a média dos valores.</li>
+            <li style="display: flex; gap: 14px; align-items: center; font-size: 17px; background: #F5F5F7; border-radius: 14px; padding: 14px 16px"><b style="color: #0066CC; width: 20px">2</b>Subtrair a média de cada observação.</li>
+            <li style="display: flex; gap: 14px; align-items: center; font-size: 17px; background: #E8F2FC; border-radius: 14px; padding: 14px 16px; box-shadow: inset 0 0 0 2px #0071E3"><b style="color: #0066CC; width: 20px">3</b>Elevar cada diferença ao quadrado.</li>
+            <li style="display: flex; gap: 14px; align-items: center; font-size: 17px; background: #F5F5F7; border-radius: 14px; padding: 14px 16px"><b style="color: #0066CC; width: 20px">4</b>Somar os resultados.</li>
+            <li style="display: flex; gap: 14px; align-items: center; font-size: 17px; background: #F5F5F7; border-radius: 14px; padding: 14px 16px"><b style="color: #0066CC; width: 20px">5</b>Dividir pela quantidade adequada de observações.</li>
+          </ol>
+        </sc-if>
+
+        <sc-if value="{{c1}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <div style="align-self: flex-start; display: flex; align-items: center; gap: 14px; font-family: JetBrains Mono, monospace; font-size: 32px; background: #F5F5F7; border-radius: 16px; padding: 22px 28px">
+              <span>σ² =</span>
+              <span style="display: inline-flex; flex-direction: column; align-items: center">
+                <span style="padding: 0 8px 6px">Σ(x<sub>i</sub> − x̄)²</span>
+                <span style="border-top: 2px solid #1D1D1F; padding: 6px 14px 0; color: #0066CC; background: #E8F2FC; border-radius: 0 0 8px 8px">k</span>
+              </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 15px">
+              <span style="background: #F5F5F7; border-radius: 12px; padding: 12px 14px"><b>σ²</b> — variância populacional</span>
+              <span style="background: #F5F5F7; border-radius: 12px; padding: 12px 14px"><b>x<sub>i</sub></b> — cada valor observado</span>
+              <span style="background: #F5F5F7; border-radius: 12px; padding: 12px 14px"><b>x̄</b> — média da população</span>
+              <span style="background: #E8F2FC; border-radius: 12px; padding: 12px 14px; color: #004E9E"><b>k</b> — quantidade total de elementos</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c2}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <span style="font-size: 16px; color: #6E6E73">Tempos de execução (s): <b style="color: #1D1D1F; font-family: JetBrains Mono, monospace">2, 4, 6, 8, 10</b></span>
+            <div style="font-family: JetBrains Mono, monospace; font-size: 26px; display: flex; flex-direction: column; gap: 10px; background: #F5F5F7; border-radius: 16px; padding: 22px 26px">
+              <span>x̄ = (2 + 4 + 6 + 8 + 10) ÷ 5</span>
+              <span>x̄ = 30 ÷ 5</span>
+              <span style="color: #0066CC; font-weight: 600">x̄ = 6</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c3}}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x: auto; border-radius: 16px; border: 1px solid #E8E8ED">
+            <table style="border-collapse: collapse; width: 100%; font-family: JetBrains Mono, monospace; font-size: 17px; text-align: center">
+              <thead><tr style="background: #F5F5F7; font-family: Inter, sans-serif; font-size: 13px; color: #6E6E73"><th style="padding: 12px; font-weight: 600">Valor x<sub>i</sub></th><th style="padding: 12px; font-weight: 600">x<sub>i</sub> − x̄</th><th style="padding: 12px; font-weight: 600">(x<sub>i</sub> − x̄)²</th></tr></thead>
+              <tbody>
+                <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 11px">2</td><td>2 − 6 = −4</td><td style="color: #0066CC">16</td></tr>
+                <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 11px">4</td><td>4 − 6 = −2</td><td style="color: #0066CC">4</td></tr>
+                <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 11px">6</td><td>6 − 6 = 0</td><td style="color: #0066CC">0</td></tr>
+                <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 11px">8</td><td>8 − 6 = 2</td><td style="color: #0066CC">4</td></tr>
+                <tr style="border-top: 1px solid #E8E8ED"><td style="padding: 11px">10</td><td>10 − 6 = 4</td><td style="color: #0066CC">16</td></tr>
+                <tr style="border-top: 1px solid #E8E8ED; background: #F5F5F7; font-weight: 600"><td style="padding: 12px; font-family: Inter, sans-serif">Total</td><td></td><td>16 + 4 + 0 + 4 + 16 = 40</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c4}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div style="font-family: JetBrains Mono, monospace; font-size: 26px; display: flex; flex-direction: column; gap: 10px; background: #F5F5F7; border-radius: 16px; padding: 22px 26px">
+              <span>σ² = 40 ÷ 5</span>
+              <span style="color: #0066CC; font-weight: 600">σ² = 8 s²</span>
+            </div>
+            <div style="background: #FFF4E5; color: #8A4B00; border-radius: 14px; padding: 14px 16px; font-size: 15px; line-height: 1.5">A unidade da variância fica ao quadrado (segundos²). Por isso a interpretação direta é menos intuitiva.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c5}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <div style="font-family: JetBrains Mono, monospace; font-size: 26px; display: flex; flex-direction: column; gap: 10px; background: #F5F5F7; border-radius: 16px; padding: 22px 26px">
+              <span>s² = 40 ÷ (5 − 1)</span>
+              <span>s² = 40 ÷ 4</span>
+              <span style="color: #0066CC; font-weight: 600">s² = 10 s²</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 15px; line-height: 1.5">
+              <div style="background: #F5F5F7; border-radius: 14px; padding: 14px 16px"><b>Populacional · σ²</b><br><span style="color: #6E6E73">Todos os elementos. Divide por N.</span></div>
+              <div style="background: #E8F2FC; border-radius: 14px; padding: 14px 16px"><b style="color: #004E9E">Amostral · s²</b><br><span style="color: #424245">Só uma amostra. Divide por n − 1.</span></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c6}}" hint-placeholder-val="{{ false }}">
+          <div style="font-family: JetBrains Mono, monospace; font-size: 26px; display: flex; flex-direction: column; gap: 10px; background: #F5F5F7; border-radius: 16px; padding: 22px 26px">
+            <span>σ = √σ²</span>
+            <span>σ = √8</span>
+            <span style="color: #0066CC; font-weight: 600">σ ≈ 2,83 s</span>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{c7}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 19px; line-height: 1.5">Uma empresa seleciona <b>30 computadores entre 500</b> para avaliar o desempenho. Qual variância ela usa?</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px">
+              <button type="button" class="b" onClick="{{escolherPop}}" style="flex: 1 1 200px; padding: 18px; border-radius: 14px; font: 500 17px Inter, sans-serif; color: #1D1D1F; background: #FFFFFF; border: 2px solid {{bordaPop}}">Populacional (σ²)</button>
+              <button type="button" class="b" onClick="{{escolherAmo}}" style="flex: 1 1 200px; padding: 18px; border-radius: 14px; font: 500 17px Inter, sans-serif; color: #1D1D1F; background: #FFFFFF; border: 2px solid {{bordaAmo}}">Amostral (s²)</button>
+            </div>
+            <sc-if value="{{feedback}}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="border-radius: 14px; padding: 14px 16px; font-size: 16px; background: {{fbFundo}}; color: {{fbCor}}">{{fbTexto}}</div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{temDuvida}}" hint-placeholder-val="{{ true }}">
+          <details style="background: #F5F5F7; border-radius: 14px; padding: 14px 16px; font-size: 16px">
+            <summary style="cursor: pointer; font-weight: 600; color: #0066CC">{{card.duvida}}</summary>
+            <p style="margin: 10px 0 0; line-height: 1.55; color: #424245">{{card.resposta}}</p>
+          </details>
+        </sc-if>
+
+        <div style="margin-top: auto; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 8px">
+          <button type="button" class="b" onClick="{{anterior}}" style="padding: 12px 20px; border-radius: 980px; background: #F5F5F7; border: 0; color: #1D1D1F; font: 500 16px Inter, sans-serif">Voltar</button>
+          <button type="button" class="b" onClick="{{proximo}}" style="padding: 12px 24px; border-radius: 980px; background: #0071E3; border: 0; color: #FFFFFF; font: 500 16px Inter, sans-serif">{{rotuloProximo}}</button>
+        </div>
+      </section>
+
+      <aside aria-label="Faça a conta na calculadora" style="flex: 1 1 250px; max-width: 290px; background: #FFFFFF; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <strong style="font-size: 15px; font-weight: 600">Na calculadora</strong>
+        <div style="background: #2B2B31; border-radius: 16px; padding: 12px">
+          <div style="background: #C3CFAE; border-radius: 6px; padding: 8px 10px; color: #1C2414; font-family: JetBrains Mono, monospace; min-height: 64px; display: flex; flex-direction: column; justify-content: space-between">
+            <span style="font-size: 13px; overflow-wrap: anywhere">{{display1}}</span>
+            <span style="font-size: 24px; text-align: right; font-weight: 600">{{display2}}</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; min-height: 40px">
+          <sc-for list="{{teclas}}" as="k" hint-placeholder-count="6">
+            <span style="min-width: 34px; height: 34px; padding: 0 7px; box-sizing: border-box; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; font: 600 15px JetBrains Mono, monospace; {{k.estilo}}">{{k.rotulo}}</span>
+          </sc-for>
+          <sc-if value="{{semTeclas}}" hint-placeholder-val="{{ false }}"><span style="color: #6E6E73; font-size: 14px">Esta etapa não tem conta.</span></sc-if>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <button type="button" class="b" onClick="{{reproduzir}}" style="flex: 1; padding: 10px; border-radius: 980px; background: #0071E3; border: 0; color: #FFFFFF; font: 500 14px Inter, sans-serif">Reproduzir</button>
+          <button type="button" class="b" onClick="{{passo}}" style="flex: 1; padding: 10px; border-radius: 980px; background: #F5F5F7; border: 0; color: #0066CC; font: 500 14px Inter, sans-serif">Tecla a tecla</button>
+        </div>
+        <span style="font-size: 13px; color: #6E6E73; line-height: 1.4">A tecla em azul é a próxima a apertar na sua Casio.</span>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { i: 0, p: -1, resp: null, xp: 320 };
+    this.timer = null;
+  }
+  componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
+  cards() {
+    return [
+      { curto: 'Os 5 passos', titulo: 'Os 5 passos da variância', fonte: 'Aula 04 · Variância',
+        texto: 'A variância indica o quanto os valores observados se afastam da média aritmética. O cálculo tem 5 passos, sempre nesta ordem.',
+        duvida: 'Por que elevar ao quadrado?', resposta: 'Para os desvios positivos e negativos não se anularem — o mesmo motivo do módulo no desvio médio.', teclas: [], resultado: '' },
+      { curto: 'Fórmula populacional', titulo: 'Variância populacional', fonte: 'Aula 04 · Variância Populacional',
+        texto: 'Quando temos todos os elementos da população, dividimos a soma dos desvios ao quadrado pela quantidade total de elementos, k.',
+        duvida: '', resposta: '', teclas: [], resultado: '' },
+      { curto: 'Passo 1 · média', titulo: 'Passo 1: a média', fonte: 'Aula 04 · Exemplo',
+        texto: 'Somamos os 5 tempos e dividimos pela quantidade de valores.',
+        duvida: 'Por que dividir por 5?', resposta: 'Porque são 5 valores: 2, 4, 6, 8 e 10.',
+        teclas: ['(','2','+','4','+','6','+','8','+','1','0',')','÷','5','='], resultado: '6' },
+      { curto: 'Passos 2 a 4', titulo: 'Desvios ao quadrado e soma', fonte: 'Aula 04 · Exemplo',
+        texto: 'Cada valor menos a média. Depois elevamos cada diferença ao quadrado e somamos tudo.',
+        duvida: 'O −4 vira 16?', resposta: 'Sim: (−4)² = (−4) × (−4) = 16. Ao elevar ao quadrado, o sinal negativo some.',
+        teclas: ['(','(−)','4',')','x²','='], resultado: '16' },
+      { curto: 'Passo 5 · dividir', titulo: 'Passo 5: dividir por k', fonte: 'Aula 04 · Variância Populacional',
+        texto: 'Como estamos considerando todos os cinco valores, usamos a fórmula populacional.',
+        duvida: '', resposta: '', teclas: ['4','0','÷','5','='], resultado: '8' },
+      { curto: 'E na amostra?', titulo: 'Variância amostral', fonte: 'Aula 04 · Variância Amostral',
+        texto: 'Mesmos dados, mas agora são 5 computadores escolhidos de uma empresa: uma amostra. Dividimos por n − 1.',
+        duvida: 'Por que n − 1?', resposta: 'É a correção de Bessel: um ajuste ao usar uma amostra para estimar a variabilidade de toda a população.',
+        teclas: ['4','0','÷','(','5','−','1',')','='], resultado: '10' },
+      { curto: 'Desvio padrão', titulo: 'Desvio padrão', fonte: 'Aula 05 · Desvio Padrão',
+        texto: 'O desvio padrão é a raiz quadrada da variância. Ele mostra a dispersão na mesma unidade dos dados: segundos.',
+        duvida: '', resposta: '', teclas: ['√','8','='], resultado: '2.828427125' },
+      { curto: 'Desafio', titulo: 'Desafio', fonte: 'Aula 04 · Exemplo de uso',
+        texto: 'Escolha a resposta. Acertando, você ganha 10 XP.',
+        duvida: '', resposta: '', teclas: [], resultado: '' }
+    ];
+  }
+  renderVals() {
+    const cs = this.cards();
+    const { i, p, resp } = this.state;
+    const card = cs[i];
+    const n = card.teclas.length;
+    const flags = {};
+    cs.forEach((_, j) => { flags['c' + j] = j === i; });
+    const ir = (j) => () => { if (this.timer) clearInterval(this.timer); this.setState({ i: j, p: -1 }); };
+    const etapas = cs.map((c, j) => ({
+      titulo: c.curto, ir: ir(j),
+      fundo: j === i ? '#E8F2FC' : 'transparent',
+      simbolo: j < i ? '✓' : String(j + 1),
+      marca: j < i ? 'background:#248A3D;color:#FFFFFF' : (j === i ? 'background:#0071E3;color:#FFFFFF' : 'background:#F5F5F7;color:#6E6E73')
+    }));
+    const teclas = card.teclas.map((t, j) => {
+      let estilo = 'background:#F5F5F7;color:#1D1D1F';
+      if (p >= 0 && j < p) estilo = 'background:#F5F5F7;color:#AEAEB2';
+      if (j === p || (p < 0 && j === 0)) estilo = 'background:#0071E3;color:#FFFFFF';
+      return { rotulo: t, estilo };
+    });
+    const typed = p < 0 ? '' : card.teclas.slice(0, p + 1).map((t) => t === 'x²' ? '²' : (t === '(−)' ? '−' : t)).join('');
+    const fim = n > 0 && p >= n - 1;
+    const reproduzir = () => {
+      if (!n) return;
+      if (this.timer) clearInterval(this.timer);
+      this.setState({ p: 0 });
+      this.timer = setInterval(() => {
+        const np = this.state.p + 1;
+        if (np >= n) { clearInterval(this.timer); this.timer = null; return; }
+        this.setState({ p: np });
+      }, 550);
+    };
+    const passo = () => { if (!n) return; if (this.timer) clearInterval(this.timer); this.setState({ p: p >= n - 1 ? 0 : p + 1 }); };
+    const escolher = (r) => () => { if (this.state.resp === 'amo') return; this.setState({ resp: r, xp: r === 'amo' ? this.state.xp + 10 : this.state.xp }); };
+    const certo = resp === 'amo';
+    return {
+      ...flags, card, etapas, teclas,
+      xp: this.state.xp,
+      numCard: i + 1, totalCards: cs.length,
+      progresso: Math.round(((i + 1) / cs.length) * 100) + '%',
+      temDuvida: !!card.duvida,
+      semTeclas: n === 0,
+      display1: typed || (n ? 'Toque em Reproduzir' : ' '),
+      display2: fim ? card.resultado : '0',
+      reproduzir, passo,
+      proximo: () => { if (i < cs.length - 1) ir(i + 1)(); },
+      anterior: () => { if (i > 0) ir(i - 1)(); },
+      rotuloProximo: i === cs.length - 1 ? 'Concluir trilha' : 'Continuar',
+      escolherPop: escolher('pop'), escolherAmo: escolher('amo'),
+      bordaPop: resp === 'pop' ? '#D70015' : '#D2D2D7',
+      bordaAmo: certo ? '#248A3D' : '#D2D2D7',
+      feedback: resp !== null,
+      fbFundo: certo ? '#E8F6EC' : '#FDECEC',
+      fbCor: certo ? '#1E6B31' : '#A1000F',
+      fbTexto: certo ? 'Certo. São 30 de 500, uma amostra: divide por n − 1. +10 XP' : 'Ainda não. A empresa usou só uma parte dos 500 computadores. Tente de novo.'
+    };
+  }
+}
+</script>
+</body>
+</html>

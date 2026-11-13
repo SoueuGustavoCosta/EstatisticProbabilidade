@@ -1,0 +1,1306 @@
+{
+ "descricao": "Exercícios das aulas e da apostila. gabarito null = material não traz resposta (o app resolve passo a passo no Laboratório, sem marcar 'oficial').",
+ "exercicios": [
+  {
+   "id": "A3-1a",
+   "fonte": "Aula 03 · Exercícios de fixação 1a",
+   "trilha": 2,
+   "enunciado": "Identifique o tipo de amostragem: um cabo eleitoral escreve o nome de cada senador do Brasil em cartões separados, mistura e extrai 10 nomes.",
+   "alternativas": [
+    "Aleatória simples",
+    "Sistemática",
+    "Estratificada"
+   ],
+   "gabarito": "Aleatória simples",
+   "obs": "Gabarito deduzido das definições do A1 (sorteio)."
+  },
+  {
+   "id": "A3-1b",
+   "fonte": "Aula 03 · Exercícios de fixação 1b",
+   "trilha": 2,
+   "enunciado": "Identifique o tipo de amostragem: um administrador hospitalar entrevista uma a cada 10 pessoas da fila de espera do SUS.",
+   "alternativas": [
+    "Aleatória simples",
+    "Sistemática",
+    "Estratificada"
+   ],
+   "gabarito": "Sistemática",
+   "obs": "Gabarito deduzido das definições do A1 (intervalo regular)."
+  },
+  {
+   "id": "A3-2",
+   "fonte": "Aula 03 · Exercício 2",
+   "trilha": 2,
+   "enunciado": "Descreva a forma de se obter uma amostra sistemática com 10 elementos de uma população com tamanho 100.",
+   "gabarito": null,
+   "obs": "Resposta aberta. Método do A1: k = 100/10 = 10; ponto de partida aleatório entre 1 e 10 e depois um a cada 10."
+  },
+  {
+   "id": "A3-3",
+   "fonte": "Aula 03 · Exercício 3",
+   "trilha": 2,
+   "enunciado": "Em uma faculdade existem 250 alunos (1º ao 8º período: 35, 32, 30, 28, 35, 32, 31, 27). Determine quantos alunos devem ser retirados de cada período para uma amostra de 40 alunos.",
+   "dados": {
+    "estratos": [
+     35,
+     32,
+     30,
+     28,
+     35,
+     32,
+     31,
+     27
+    ],
+    "n": 40
+   },
+   "gabarito": null,
+   "obs": "Material não traz gabarito; valores não inteiros — ver P-07."
+  },
+  {
+   "id": "A3-4",
+   "fonte": "Aula 03 · Exercício 4",
+   "trilha": 2,
+   "enunciado": "Uma amostra sistemática terá 6 elementos de uma população de 360 (numerados de 1 a 360). O primeiro sorteado foi o 45. Qual será o terceiro elemento?",
+   "dados": {
+    "N": 360,
+    "n": 6,
+    "inicio": 45
+   },
+   "gabarito": 165,
+   "obs": "k = 60 → 45, 105, 165. Gabarito deduzido pelo método do A1."
+  },
+  {
+   "id": "A3-5",
+   "fonte": "Aula 03 · Exercício 5",
+   "trilha": 2,
+   "enunciado": "Uma escola tem 280 meninos e 320 meninas. Amostra proporcional estratificada de 50 alunos. As famílias de quantos meninos serão entrevistadas?",
+   "dados": {
+    "estratos": {
+     "meninos": 280,
+     "meninas": 320
+    },
+    "n": 50
+   },
+   "gabarito": null,
+   "obs": "280/600 × 50 = 23,33… — material não traz gabarito; ver P-07."
+  },
+  {
+   "id": "A3-6",
+   "fonte": "Aula 03 · Exercício 6",
+   "trilha": 4,
+   "enunciado": "Número de livros adquiridos por 40 alunos: a) classifique a variável; b) organize em tabela; c) % que adquiriram menos de 3 livros; d) % com pelo menos 4 livros; e) total de livros adquiridos.",
+   "dados": {
+    "valores": [
+     4,
+     2,
+     1,
+     0,
+     3,
+     1,
+     2,
+     0,
+     2,
+     1,
+     0,
+     2,
+     1,
+     1,
+     0,
+     4,
+     3,
+     2,
+     3,
+     5,
+     8,
+     0,
+     1,
+     6,
+     5,
+     3,
+     2,
+     1,
+     6,
+     4,
+     3,
+     4,
+     3,
+     2,
+     1,
+     0,
+     2,
+     1,
+     0,
+     3
+    ]
+   },
+   "gabarito": null,
+   "obs": "Material não traz gabarito; o Laboratório (L1/L2) resolve com passos."
+  },
+  {
+   "id": "A4-ex-chamados",
+   "fonte": "Aula 04 · Exercício (resolvido no slide)",
+   "trilha": 5,
+   "enunciado": "Tempos de 20 chamados: organize em rol, use as classes (10,20], (20,30], (30,40], (40,50], conte ni e calcule fi. Em qual intervalo houve maior concentração?",
+   "dados": {
+    "valores": [
+     12,
+     18,
+     25,
+     31,
+     22,
+     15,
+     37,
+     41,
+     28,
+     33,
+     19,
+     45,
+     26,
+     38,
+     29,
+     17,
+     35,
+     43,
+     24,
+     32
+    ]
+   },
+   "gabarito": {
+    "ni": [
+     5,
+     6,
+     6,
+     3
+    ],
+    "fi": [
+     25,
+     30,
+     30,
+     15
+    ],
+    "maior_concentracao": "(20,30] e (30,40] com 30% cada"
+   }
+  },
+  {
+   "id": "A4-at1",
+   "fonte": "Aula 04 · Atividade 1",
+   "trilha": 5,
+   "enunciado": "Dias para montagem de galpão (50 valores). Monte a tabela de distribuição de frequência com intervalo de classe.",
+   "dados": {
+    "valores": [
+     146,
+     150,
+     150,
+     150,
+     153,
+     153,
+     155,
+     157,
+     158,
+     158,
+     158,
+     158,
+     159,
+     159,
+     162,
+     162,
+     162,
+     162,
+     162,
+     163,
+     163,
+     164,
+     164,
+     166,
+     166,
+     166,
+     168,
+     170,
+     170,
+     170,
+     171,
+     172,
+     173,
+     175,
+     175,
+     176,
+     177,
+     177,
+     178,
+     178,
+     179,
+     179,
+     180,
+     181,
+     181,
+     185,
+     188,
+     192,
+     195,
+     196
+    ]
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito no material; ver P-03."
+  },
+  {
+   "id": "A4-at2",
+   "fonte": "Aula 04 · Atividade 2",
+   "trilha": 5,
+   "enunciado": "Salários de 40 empregados: [800;900) 4, [900;1000) 10, [1000;1100) 18, [1100;1200) 5, [1200;1300) 3. a) amplitude do intervalo de classes; b) quadro de distribuição de frequências; c) quantos ganham R$1000,00 ou mais; d) quantos ganham entre R$800,00 (inclusive) e R$1200,00.",
+   "dados": {
+    "classes": [
+     [
+      800,
+      900,
+      4
+     ],
+     [
+      900,
+      1000,
+      10
+     ],
+     [
+      1000,
+      1100,
+      18
+     ],
+     [
+      1100,
+      1200,
+      5
+     ],
+     [
+      1200,
+      1300,
+      3
+     ]
+    ],
+    "intervalo": "[a,b)"
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito no material."
+  },
+  {
+   "id": "A4-at3",
+   "fonte": "Aula 04/05 · Atividade 3",
+   "trilha": 5,
+   "enunciado": "Alturas (cm) de 100 indivíduos (rol). Construa a tabela de frequência com intervalo de classe.",
+   "dados": {
+    "valores": [
+     151,
+     152,
+     154,
+     155,
+     158,
+     159,
+     159,
+     160,
+     161,
+     161,
+     161,
+     162,
+     163,
+     163,
+     163,
+     164,
+     165,
+     165,
+     165,
+     166,
+     166,
+     166,
+     166,
+     167,
+     167,
+     167,
+     167,
+     167,
+     168,
+     168,
+     168,
+     168,
+     168,
+     168,
+     168,
+     168,
+     168,
+     168,
+     169,
+     169,
+     169,
+     169,
+     169,
+     169,
+     169,
+     170,
+     170,
+     170,
+     170,
+     170,
+     170,
+     170,
+     171,
+     171,
+     171,
+     171,
+     172,
+     172,
+     172,
+     173,
+     173,
+     173,
+     174,
+     174,
+     174,
+     175,
+     175,
+     175,
+     175,
+     176,
+     176,
+     176,
+     176,
+     177,
+     177,
+     177,
+     177,
+     178,
+     178,
+     178,
+     179,
+     179,
+     180,
+     180,
+     180,
+     180,
+     181,
+     181,
+     181,
+     182,
+     182,
+     182,
+     183,
+     184,
+     185,
+     186,
+     187,
+     188,
+     190,
+     190
+    ]
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito no material."
+  },
+  {
+   "id": "A4-at4",
+   "fonte": "Aula 04/05 · Atividade 4",
+   "trilha": 4,
+   "enunciado": "Massa (kg) de 20 trabalhadores de uma empresa com 100 funcionários. Monte a tabela de distribuição de frequência sem intervalo de classe.",
+   "dados": {
+    "valores": [
+     65,
+     52,
+     73,
+     80,
+     65,
+     50,
+     70,
+     75,
+     80,
+     65,
+     70,
+     77,
+     82,
+     91,
+     75,
+     52,
+     68,
+     86,
+     70,
+     80
+    ]
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito no material."
+  },
+  {
+   "id": "A5-at1",
+   "fonte": "Aula 05 · Atividade 1 (resultados no slide)",
+   "trilha": 10,
+   "enunciado": "Tempos de resposta (amostra): 4, 6, 8, 10, 12 ms. a) média; b) amplitude total; c) variância amostral; d) desvio padrão amostral; e) interprete.",
+   "dados": {
+    "valores": [
+     4,
+     6,
+     8,
+     10,
+     12
+    ],
+    "tipo_dados": "amostra"
+   },
+   "gabarito": {
+    "media": 8,
+    "amplitude_total": 8,
+    "variancia": 10,
+    "desvio_padrao": 3.16
+   }
+  },
+  {
+   "id": "A5-at2",
+   "fonte": "Aula 05/06 · Atividade 2",
+   "trilha": 10,
+   "enunciado": "População de 40 profissionais: nº de publicações 0,1,2,3,4 com 6, 8, 12, 10, 4 profissionais. a) % com menos de 3 publicações; b) desvio médio, variância e desvio padrão.",
+   "dados": {
+    "tabela": [
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      12
+     ],
+     [
+      3,
+      10
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "tipo_dados": "populacao"
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito no material; o Laboratório L2 resolve."
+  },
+  {
+   "id": "A6-at3",
+   "fonte": "Aula 06 · Atividade 3",
+   "trilha": 10,
+   "enunciado": "Idades de alunos (população): [16,20) 8, [20,24) 16, [24,28) 12, [28,32) 4. a) % com menos de 24 anos; b) desvio médio, variância e desvio padrão.",
+   "dados": {
+    "classes": [
+     [
+      16,
+      20,
+      8
+     ],
+     [
+      20,
+      24,
+      16
+     ],
+     [
+      24,
+      28,
+      12
+     ],
+     [
+      28,
+      32,
+      4
+     ]
+    ],
+    "intervalo": "[a,b)",
+    "tipo_dados": "populacao"
+   },
+   "gabarito": null,
+   "obs": "Sem gabarito; depende de P-01 e P-02."
+  },
+  {
+   "id": "A6-assim",
+   "fonte": "Aula 06 · Atividade de assimetria",
+   "trilha": 11,
+   "enunciado": "Identifique a forma: A) média 18, mediana 18, moda 18; B) média 42, mediana 35, moda 30; C) média 12, mediana 16, moda 20.",
+   "gabarito": {
+    "A": "simétrica",
+    "B": "assimétrica positiva",
+    "C": "assimétrica negativa"
+   },
+   "obs": "Gabarito deduzido das relações do A6."
+  },
+  {
+   "id": "AP-U1-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q1",
+   "trilha": 6,
+   "enunciado": "(ENADE 2014) Jornada de trabalho de mulheres e homens — avalie as afirmações I, II e III.",
+   "alternativas": {
+    "a": "I, apenas.",
+    "b": "III, apenas.",
+    "c": "I e II, apenas.",
+    "d": "II e III, apenas.",
+    "e": "I, II e III."
+   },
+   "gabarito": "c",
+   "depende_de_imagem": "estatistica.pdf p.17 (Gráfico 1) — transcrever afirmações completas"
+  },
+  {
+   "id": "AP-U1-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q2",
+   "trilha": 6,
+   "enunciado": "(ENADE 2014) Proporção de trabalhadores por tempo de deslocamento casa-trabalho — avalie I, II e III.",
+   "alternativas": {
+    "a": "I, apenas.",
+    "b": "III, apenas.",
+    "c": "I e II, apenas.",
+    "d": "II e III, apenas.",
+    "e": "I, II e III."
+   },
+   "gabarito": "e",
+   "depende_de_imagem": "estatistica.pdf p.18 (Quadro 1)"
+  },
+  {
+   "id": "AP-U1-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q3",
+   "trilha": 6,
+   "enunciado": "(ENADE 2017) Contribuições dos países para a UE em 2014 — assinale a opção correta.",
+   "alternativas": {
+    "a": "A contribuição dos quatro maiores países do bloco somou 41,13%.",
+    "b": "O grupo 'Outros países' contribuiu com 42,1%.",
+    "c": "A diferença da contribuição do Reino Unido em relação ao recebido foi 38,94%.",
+    "d": "A soma das participações dos três países com maior contribuição supera 50%.",
+    "e": "O percentual do Reino Unido em 2014 foi de 17,8%, entre os quatro maiores."
+   },
+   "gabarito": "c",
+   "depende_de_imagem": "estatistica.pdf p.19 (Gráfico 2)"
+  },
+  {
+   "id": "AP-U1-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q4",
+   "trilha": 6,
+   "enunciado": "(ENADE 2014) O aumento da razão entre pegada ecológica e biocapacidade evidencia:",
+   "alternativas": {
+    "a": "redução das áreas de plantio para menos de 10.000 m².",
+    "b": "aumento gradual da capacidade de regeneração.",
+    "c": "reposição dos recursos em sua totalidade.",
+    "d": "incapacidade de regeneração natural do planeta no período 1961-2008.",
+    "e": "nenhuma das opções acima"
+   },
+   "gabarito": "e",
+   "obs": "Gabarito oficial da apostila = E.",
+   "depende_de_imagem": "estatistica.pdf p.20 (Gráfico 3)"
+  },
+  {
+   "id": "AP-U1-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q5",
+   "trilha": 3,
+   "enunciado": "(IDHTEC 2023) As variáveis Idade (anos), Tipo sanguíneo, Escolaridade e Unidade da Federação são, nesta ordem:",
+   "alternativas": {
+    "a": "quantitativa discreta; qualitativa ordinal; quantitativa discreta; qualitativa nominal.",
+    "b": "quantitativa contínua; qualitativa ordinal; quantitativa discreta; qualitativa ordinal.",
+    "c": "quantitativa discreta; qualitativa nominal; quantitativa contínua; qualitativa nominal.",
+    "d": "quantitativa contínua; qualitativa ordinal; quantitativa discreta; qualitativa ordinal.",
+    "e": "quantitativa discreta; qualitativa nominal; qualitativa ordinal; qualitativa nominal."
+   },
+   "gabarito": "e"
+  },
+  {
+   "id": "AP-U1-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q6",
+   "trilha": 2,
+   "enunciado": "(CESGRANRIO adapt.) 2.000 estudantes: Fase 1 = 600, Fase 2 = 900, Fase 3 = 500. Amostra proporcional de 80. Quantos de cada fase?",
+   "alternativas": {
+    "a": "15, 20, 45",
+    "b": "20, 30, 15",
+    "c": "24, 36, 20",
+    "d": "25, 40, 15",
+    "e": "30, 45, 25"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U1-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q7",
+   "trilha": 6,
+   "enunciado": "(SELECON adapt.) 60 alunos com conceitos A, B, C, D; gráfico de frequência relativa (A 15%, B 35%, C 30%, D 20%). A frequência absoluta de alunos com conceito:",
+   "alternativas": {
+    "a": "A é igual a 15.",
+    "b": "B é igual a 23.",
+    "c": "C é igual a 18.",
+    "d": "D é igual a 16.",
+    "e": "Nenhuma das alternativas."
+   },
+   "gabarito": "c",
+   "depende_de_imagem": "estatistica.pdf p.21 (Gráfico 4) — percentuais lidos do gráfico"
+  },
+  {
+   "id": "AP-U1-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U1 Q8",
+   "trilha": 2,
+   "enunciado": "(Consulplan adapt.) Empresa com 500 funcionários, amostra estratificada proporcional. População: Masculino A, Feminino 255, Outro C. Amostra: Masculino B, Feminino 51, Outro 2. Valores de B, A e C:",
+   "alternativas": {
+    "a": "43, 237 e 8.",
+    "b": "47, 235 e 10.",
+    "c": "235, 47 e 10.",
+    "d": "237, 43 e 8.",
+    "e": "235, 43 e 10."
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U2-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q1",
+   "trilha": 7,
+   "enunciado": "(CESPE 2024) Sobre a média aritmética: I. não é afetada por valores discrepantes…; II. sempre produz resultados inteiros…; III. é a soma dos valores dividida pela quantidade. Assinale:",
+   "alternativas": {
+    "a": "Nenhum item está certo.",
+    "b": "Apenas o I.",
+    "c": "Apenas o II.",
+    "d": "Apenas o III.",
+    "e": "Todos."
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U2-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q2",
+   "trilha": 8,
+   "enunciado": "(CS-UFG 2023) Pesos em 10 semanas: 81,1; 80,5; 80,4; 80,2; 80,5; 79,8; 79,6; 79,8; 78,7; 78,5. Qual a mediana?",
+   "dados": {
+    "valores": [
+     81.1,
+     80.5,
+     80.4,
+     80.2,
+     80.5,
+     79.8,
+     79.6,
+     79.8,
+     78.7,
+     78.5
+    ]
+   },
+   "alternativas": {
+    "a": "80,0 kg",
+    "b": "80,1 kg",
+    "c": "80,2 kg",
+    "d": "80,3 kg",
+    "e": "80,4 kg"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U2-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q3",
+   "trilha": 8,
+   "enunciado": "(IESES 2023) Alturas: 102, 98, 103, 101, 102, 100, 103, 102, 101, 102. Média, moda e mediana:",
+   "dados": {
+    "valores": [
+     102,
+     98,
+     103,
+     101,
+     102,
+     100,
+     103,
+     102,
+     101,
+     102
+    ]
+   },
+   "alternativas": {
+    "a": "101,4; 102; 102",
+    "b": "101,4; 103; 102",
+    "c": "101,5; 102; 102",
+    "d": "101,4; 102; 101",
+    "e": "101,5; 103; 102"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U2-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q4",
+   "trilha": 7,
+   "enunciado": "(IBFC 2024) A1 peso 2, A2 peso 3, A3 peso 5; média para aprovação 6,0; notas máx. 10. Aluno tirou 4,5 em A1 e 2,0 em A2. Nota mínima em A3:",
+   "alternativas": {
+    "a": "impossível (precisaria > 10)",
+    "b": "10,0",
+    "c": "9,0",
+    "d": "8,0",
+    "e": "7,0"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U2-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q5",
+   "trilha": 7,
+   "enunciado": "(SEDUC-MT 2023) Notas de 10 alunos (5,0; 6,0; 2,0; 4,2; 3,7; 8,6; 6,8; 5,9; 1,8; 6,0), média 5,0. Com aumento de 10% em cada nota, a nova média será:",
+   "dados": {
+    "valores": [
+     5.0,
+     6.0,
+     2.0,
+     4.2,
+     3.7,
+     8.6,
+     6.8,
+     5.9,
+     1.8,
+     6.0
+    ]
+   },
+   "alternativas": {
+    "a": "7,5",
+    "b": "6,5",
+    "c": "6,0",
+    "d": "5,5",
+    "e": "5,0"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U2-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q6",
+   "trilha": 8,
+   "enunciado": "(Consulplan adapt.) Lista 7-6-3-7-6-7. Acrescentando um 7º valor sem alterar a média, a nova mediana será:",
+   "alternativas": {
+    "a": "5,5",
+    "b": "5,8",
+    "c": "6",
+    "d": "6,2",
+    "e": "6,5"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U2-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q7",
+   "trilha": 8,
+   "enunciado": "(IBFC 2023) 12 executivos, salário médio 500 u.m.; 560, 570 e 490 aparecem duas vezes cada, 480 uma vez; os outros têm o mesmo salário. A moda é:",
+   "alternativas": {
+    "a": "456",
+    "b": "482",
+    "c": "507",
+    "d": "563",
+    "e": "521"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U2-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U2 Q8",
+   "trilha": 7,
+   "enunciado": "(FGV 2023) Média de 18 salários = R$5.500,00. Entram dois: R$6.000,00 e R$6.800,00. Nova média:",
+   "alternativas": {
+    "a": "R$5.550,00",
+    "b": "R$5.590,00",
+    "c": "R$5.650,00",
+    "d": "R$5.700,00",
+    "e": "R$5.810,00"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U3-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q1",
+   "trilha": 9,
+   "enunciado": "(CESPE 2024) Medidas de dispersão são:",
+   "alternativas": {
+    "a": "usadas para o valor mais frequente…",
+    "b": "aplicadas só a alta variabilidade…",
+    "c": "usadas para avaliar o quanto as observações variam em relação à média, ajudando a determinar se a variabilidade é baixa ou alta.",
+    "d": "menos importantes que as de tendência central…",
+    "e": "exclusivas para dados categóricos…"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U3-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q2",
+   "trilha": 9,
+   "enunciado": "(SELECON adapt.) Gols em 35 jogos (média 3,2). Desvio médio aproximado:",
+   "dados": {
+    "valores": [
+     6,
+     1,
+     6,
+     1,
+     2,
+     4,
+     1,
+     5,
+     3,
+     6,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     1,
+     2,
+     3,
+     5,
+     5,
+     4,
+     3,
+     4,
+     3,
+     2,
+     3,
+     2,
+     1,
+     3,
+     4,
+     5,
+     2,
+     2,
+     5
+    ]
+   },
+   "alternativas": {
+    "a": "1,2",
+    "b": "1,5",
+    "c": "2,5",
+    "d": "2,9",
+    "e": "3,2"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U3-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q3",
+   "trilha": 10,
+   "enunciado": "(FGV adapt.) Amostra {1,…,10}, arredondamento de uma casa. É correto:",
+   "alternativas": {
+    "a": "A média é 5,0.",
+    "b": "A mediana é 5,5.",
+    "c": "A moda é 5,5.",
+    "d": "O desvio padrão é 3,0.",
+    "e": "Não podemos calcular o desvio padrão."
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U3-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q4",
+   "trilha": 9,
+   "enunciado": "(FGV 2024) IPCA jan–jul/2023: 0,53; 0,84; 0,71; 0,61; 0,23; −0,08; 0,12. Mediana e amplitude:",
+   "dados": {
+    "valores": [
+     0.53,
+     0.84,
+     0.71,
+     0.61,
+     0.23,
+     -0.08,
+     0.12
+    ]
+   },
+   "alternativas": {
+    "a": "0,42 e 0,76",
+    "b": "0,53 e 0,76",
+    "c": "0,53 e 0,92",
+    "d": "0,53 e 0,485",
+    "e": "0,57 e 0,84"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U3-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q5",
+   "trilha": 9,
+   "enunciado": "(CS/UFG adapt.) X = 8, 12, 16, 20, 24. Amplitude total:",
+   "alternativas": {
+    "a": "16",
+    "b": "12",
+    "c": "8",
+    "d": "4",
+    "e": "Nenhuma"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U3-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q6",
+   "trilha": 10,
+   "enunciado": "X = 8, 12, 16, 20, 24. Variância e desvio padrão:",
+   "alternativas": {
+    "a": "16 e 4",
+    "b": "16 e 5,66",
+    "c": "32 e 5,66",
+    "d": "32 e 16",
+    "e": "Nenhuma"
+   },
+   "gabarito": "c",
+   "obs": "Gabarito usa variância populacional (160/5 = 32)."
+  },
+  {
+   "id": "AP-U3-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q7",
+   "trilha": 10,
+   "enunciado": "(FGV 2022) Amostra de idades 26, 28, 30, 32, 32, 34, 36, 38. Desvio padrão:",
+   "alternativas": {
+    "a": "2",
+    "b": "3",
+    "c": "4",
+    "d": "5",
+    "e": "6"
+   },
+   "gabarito": "c",
+   "obs": "Amostral: 112/7 = 16 → 4."
+  },
+  {
+   "id": "AP-U3-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U3 Q8",
+   "trilha": 10,
+   "enunciado": "(AOCP adapt.) Amostra 5, 7, 4, 2, 10 (milhares). Média, mediana, desvio padrão e variância:",
+   "alternativas": {
+    "a": "4,91; 7,0; 7,24; 52,42",
+    "b": "5,60; 5,00; 3,05; 9,30",
+    "c": "6,50; 6,00; 3,50; 12,25",
+    "d": "5,50; 5,50; 4,15; 17,22",
+    "e": "5,60; 5,00; 4,20; 17,64"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U4-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q1",
+   "trilha": 11,
+   "enunciado": "(CF/UFG adapt.) Exemplos de medidas de posição, dispersão e assimetria, respectivamente:",
+   "alternativas": {
+    "a": "média, variância e coef. de Pearson",
+    "b": "mediana, moda e coef. de Pearson",
+    "c": "amplitude, moda e coef. quartil",
+    "d": "média, moda e coef. quartil",
+    "e": "mediana, variância e desvio padrão"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U4-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q2",
+   "trilha": 11,
+   "enunciado": "(CESPE adapt.) Erros diários {2, 2, 3, 4, 5, 5, 14}. Terceiro quartil:",
+   "alternativas": {
+    "a": "2",
+    "b": "3",
+    "c": "4",
+    "d": "5",
+    "e": "14"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U4-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q3",
+   "trilha": 11,
+   "enunciado": "Moda 60, média 100, variância 100. 1º coeficiente de Pearson ≈",
+   "alternativas": {
+    "a": "0,4",
+    "b": "1",
+    "c": "4",
+    "d": "6",
+    "e": "16"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U4-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q4",
+   "trilha": 11,
+   "enunciado": "(NUCEPE 2019) Notas 6, 6, 7, 5, 10, 8, 8, 6, 5, 8, 8. Q1, Q2, Q3:",
+   "alternativas": {
+    "a": "6.6, 7.0, 8.5",
+    "b": "7.45, 7.50, 8.50",
+    "c": "6.8, 7.5, 5.9",
+    "d": "6.0, 7.0, 8.0",
+    "e": "6.6, 7.5, 8.5"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U4-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q5",
+   "trilha": 11,
+   "enunciado": "Do exercício anterior, coeficiente do quartil de assimetria:",
+   "alternativas": {
+    "a": "0",
+    "b": "3,5",
+    "c": "6",
+    "d": "8",
+    "e": "14"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U4-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q6",
+   "trilha": 11,
+   "enunciado": "Média 15, moda 14, desvio padrão 2. Algum coeficiente de assimetria:",
+   "alternativas": {
+    "a": "0,125",
+    "b": "0,5",
+    "c": "1",
+    "d": "1,5",
+    "e": "2"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U4-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q7",
+   "trilha": 11,
+   "enunciado": "Do exercício 2, coeficiente do momento de assimetria ≈",
+   "alternativas": {
+    "a": "−0,33",
+    "b": "0",
+    "c": "0,78",
+    "d": "2",
+    "e": "5"
+   },
+   "gabarito": "c",
+   "obs": "E-04: a conta com σ populacional dá ≈ 1,66 (nenhuma alternativa); 0,78 é o 2º Pearson. Mostrar aviso."
+  },
+  {
+   "id": "AP-U4-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U4 Q8",
+   "trilha": 11,
+   "enunciado": "Do exercício 2, segundo coeficiente de Pearson ≈",
+   "alternativas": {
+    "a": "−0,33",
+    "b": "0",
+    "c": "0,78",
+    "d": "1,67",
+    "e": "2"
+   },
+   "gabarito": "d",
+   "obs": "E-04: a conta dá ≈ 0,78 (alternativa c). Gabarito trocado com a Q7. Mostrar aviso."
+  },
+  {
+   "id": "AP-U5-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q1",
+   "trilha": 12,
+   "enunciado": "(SELECON 2023) Sobre probabilidade:",
+   "alternativas": {
+    "a": "evento certo = 0,5",
+    "b": "evento impossível = 1",
+    "c": "pode ser negativa",
+    "d": "a probabilidade de dois eventos disjuntos é a soma das probabilidades individuais",
+    "e": "nenhuma"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U5-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q2",
+   "trilha": 12,
+   "enunciado": "Duas moedas, Ω = {(cara,cara),(coroa,coroa),(cara,coroa),(coroa,cara)}. Evento e probabilidade:",
+   "alternativas": {
+    "a": "A = Ω e P(A) = 0",
+    "b": "B = {cara} e P(B) = 0,75",
+    "c": "C = {cara em pelo menos uma} e P(C) = 0,5",
+    "d": "D = {faces iguais} e P(D) = 0,5",
+    "e": "E = {faces diferentes} e P(E) = 0,75"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U5-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q3",
+   "trilha": 12,
+   "enunciado": "(FGV adapt.) A, B, C independentes: P(A∩B∩C) =",
+   "alternativas": {
+    "a": "0",
+    "b": "P(A)+P(B)+P(C)",
+    "c": "P(A)·P(B)·P(C)",
+    "d": "P(A)·P(B)·P(C) − P(A∪B∪C)",
+    "e": "outra expressão"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U5-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q4",
+   "trilha": 12,
+   "enunciado": "(CESPE 2024) A, B, C, D independentes; P = 0,4; 0,3; 0,2; 0,1. P(A∩B∩C∩D) =",
+   "alternativas": {
+    "a": "0",
+    "b": "0,0024",
+    "c": "0,0128",
+    "d": "0,0256",
+    "e": "0,25"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U5-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q5",
+   "trilha": 12,
+   "enunciado": "(CESGRANRIO 2021) Rifa 1–200; funcionária tem 75 a 79. Anunciado que o sorteado é par. Probabilidade dela ganhar:",
+   "alternativas": {
+    "a": "1%",
+    "b": "2%",
+    "c": "3%",
+    "d": "4%",
+    "e": "5%"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U5-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q6",
+   "trilha": 12,
+   "enunciado": "(NUCEPE 2023) Vitória: 60% com chuva, 80% sem chuva; chuva 30%. Probabilidade de vitória:",
+   "alternativas": {
+    "a": "70%",
+    "b": "74%",
+    "c": "76%",
+    "d": "78%",
+    "e": "80%"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U5-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q7",
+   "trilha": 12,
+   "enunciado": "(CESGRANRIO 2024) 26 vermelhas e 26 pretas; 4 primeiras de 5 cartas são vermelhas. P(5ª vermelha):",
+   "alternativas": {
+    "a": "P = 1/2",
+    "b": "9/20 < P < 1/2",
+    "c": "1/2 < P < 11/20",
+    "d": "P < 9/20",
+    "e": "P > 11/20"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U5-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U5 Q8",
+   "trilha": 12,
+   "enunciado": "(CESPE adapt.) P(D|A)=0,5, P(D|B)=0,2, P(D|C)=0,1; P(A)=0,1, P(B)=0,1, P(C)=0,8. P(C|D) =",
+   "alternativas": {
+    "a": "8/100",
+    "b": "1/10",
+    "c": "1/8",
+    "d": "8/15",
+    "e": "8/10"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U6-Q1",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q1",
+   "trilha": 13,
+   "enunciado": "Sobre a binomial, é INCORRETO:",
+   "alternativas": {
+    "a": "é de v.a. discreta",
+    "b": "só duas possibilidades",
+    "c": "sucesso e fracasso",
+    "d": "tentativas independentes",
+    "e": "é importante saber a ordem dos sucessos"
+   },
+   "gabarito": "e"
+  },
+  {
+   "id": "AP-U6-Q2",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q2",
+   "trilha": 13,
+   "enunciado": "Sobre a normal, é INCORRETO:",
+   "alternativas": {
+    "a": "densidade simétrica em relação à média",
+    "b": "área total sob a curva é 1",
+    "c": "a densidade fornece as probabilidades",
+    "d": "a tabela só é útil se for normal padrão; nos outros casos podemos desconsiderá-la",
+    "e": "sempre pode ser padronizada"
+   },
+   "gabarito": "d"
+  },
+  {
+   "id": "AP-U6-Q3",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q3",
+   "trilha": 13,
+   "enunciado": "(FGV 2023) X normal com média 50 e variância 100. Normal padrão:",
+   "alternativas": {
+    "a": "Z = (X−50)/10",
+    "b": "Z = (X−50)/100",
+    "c": "Z = (X+50)/10",
+    "d": "Z = (X+50)/100",
+    "e": "Z = X − 5"
+   },
+   "gabarito": "a"
+  },
+  {
+   "id": "AP-U6-Q4",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q4",
+   "trilha": 13,
+   "enunciado": "(NUCEPE 2023) Começa com 10 dólares; ganha 1 com 40%, perde 1 com 60%. Após 4 jogos, P(12 dólares ou mais):",
+   "alternativas": {
+    "a": "0,28",
+    "b": "0,10",
+    "c": "0,18",
+    "d": "0,50",
+    "e": "0,03"
+   },
+   "gabarito": "c",
+   "obs": "P(3 vitórias) + P(4 vitórias) = 0,1536 + 0,0256 = 0,1792."
+  },
+  {
+   "id": "AP-U6-Q5",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q5",
+   "trilha": 13,
+   "enunciado": "P(defeituosa) = 0,05; lote de 10. P(exatamente 2 defeituosas):",
+   "alternativas": {
+    "a": "4,40%",
+    "b": "7,65%",
+    "c": "8,60%",
+    "d": "10,00%",
+    "e": "20,00%"
+   },
+   "gabarito": "b",
+   "obs": "E-05: conta exata 7,46%."
+  },
+  {
+   "id": "AP-U6-Q6",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q6",
+   "trilha": 13,
+   "enunciado": "Moeda honesta 10 vezes. P(exatamente 5 caras):",
+   "alternativas": {
+    "a": "0",
+    "b": "28/6561",
+    "c": "63/256",
+    "d": "1",
+    "e": "não é possível"
+   },
+   "gabarito": "c"
+  },
+  {
+   "id": "AP-U6-Q7",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q7",
+   "trilha": 13,
+   "enunciado": "Salários normais, média R$80,00, desvio R$5,00. P(entre 80 e 85):",
+   "alternativas": {
+    "a": "5,00%",
+    "b": "34,13%",
+    "c": "48,71%",
+    "d": "65,85%",
+    "e": "85,00%"
+   },
+   "gabarito": "b"
+  },
+  {
+   "id": "AP-U6-Q8",
+   "fonte": "Apostila · Fixando o conteúdo U6 Q8",
+   "trilha": 13,
+   "enunciado": "(UFU adapt.) Diâmetro normal μ = 100,00 mm, σ² = 0,04 mm². P(entre 99,98 e 100,04):",
+   "alternativas": {
+    "a": "11,91%",
+    "b": "15,00%",
+    "c": "90,85%",
+    "d": "95,50%",
+    "e": "98,98%"
+   },
+   "gabarito": "a"
+  }
+ ]
+}
