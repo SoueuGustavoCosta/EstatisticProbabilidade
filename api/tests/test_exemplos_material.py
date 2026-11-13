@@ -170,3 +170,20 @@ def test_teclas_negativo():
 def test_campo_vazio_da_mensagem_amigavel():
     r = cliente.post("/api/calcular", json={"modulo": "independencia", "P_A": "", "P_B": "", "P_A_inter_B": ""})
     assert r.status_code == 422 and "Confira os números" in r.json()["detail"]
+
+
+def test_trabalho_tma_call_center_classes_de_25_a_partir_de_40():
+    """Trabalho em grupo 1 (Uniúnica, 19/11/2026): 40 tempos, classes [a, b) de 25 em 25 começando em 40."""
+    v = [42, 55, 61, 63, 68, 71, 74, 76, 78, 80, 82, 85, 87, 88, 90, 92, 94, 95, 97, 98, 101, 103, 105, 107, 110, 112,
+         115, 118, 120, 123, 126, 130, 134, 138, 142, 147, 152, 158, 165, 175]
+    assert len(v) == 40
+    r = MODULOS["montar_classes"]({"modulo": "montar_classes", "valores": v, "intervalo": "[a,b)", "K": 6, "h": 25, "inicio": 40})
+    o = {x["id"]: x["valor"] for x in r["resultados"]}
+    assert o["ni"] == [4, 10, 12, 8, 4, 2] and o["fi_percent"] == [10, 25, 30, 20, 10, 5]
+    t = MODULOS["tabela_classes"]({"modulo": "tabela_classes", "classes": [[40 + 25 * i, 65 + 25 * i, n] for i, n in enumerate(o["ni"])],
+                                   "intervalo": "[a,b)", "tipo_dados": "populacao"})
+    m = {x["id"]: x["valor"] for x in t["resultados"]}
+    assert m["pontos_medios"] == [52, 77, 102, 127, 152, 177] and m["media_ponderada"] == 104.5
+    b = MODULOS["dados_brutos"]({"modulo": "dados_brutos", "valores": v, "tipo_dados": "populacao"})
+    d = {x["id"]: x["valor"] for x in b["resultados"]}
+    assert d["amplitude_total"] == 133 and d["mediana"] == 99.5 and abs(d["media"] - 103.925) < 1e-9
