@@ -18,7 +18,7 @@ function CampoForm({ c, v, set }: { c: Campo; v: string | string[][]; set: (v: s
         <div className="inline-flex w-fit rounded-full bg-[#E8E8ED] p-0.5">
           {c.opcoes.map(([val, nome]) => (
             <button key={val} type="button" role="radio" aria-checked={v === val} onClick={() => set(val)}
-              className={`rounded-full px-4 py-1.5 text-[15px] ${v === val ? "bg-white font-semibold shadow-sm" : "text-texto-2"}`}>{nome}</button>
+              className={`rounded-full px-4 py-1.5 text-[15px] ${v === val ? "bg-white font-semibold shadow-sm" : "text-texto-3"}`}>{nome}</button>
           ))}
         </div>
       </div>

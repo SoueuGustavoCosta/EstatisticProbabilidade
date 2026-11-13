@@ -51,8 +51,8 @@ export default function TrilhaPlayer({ trilha, aoCard, aoTerminar, concluidos = 
             <li key={k}>
               {k === trilha.cards.length && <div className="px-3 pb-1 pt-3 text-[12px] font-semibold uppercase tracking-wide text-texto-2">Desafio</div>}
               <button type="button" onClick={() => vai(k)} aria-current={k === i ? "step" : undefined}
-                className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-[14px] ${k === i ? "bg-azul-claro font-semibold text-azul" : "hover:bg-white"}`}>
-                <span className={`flex h-5 w-5 flex-none items-center justify-center rounded-full text-[11px] ${vistos.has(k) || concluidos.includes(k) ? "bg-verde text-white" : "bg-linha text-texto-2"}`}>{vistos.has(k) || concluidos.includes(k) ? "✓" : k + 1}</span>
+                className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-[14px] ${k === i ? "bg-azul-claro font-semibold text-[#004E9E]" : "hover:bg-white"}`}>
+                <span className={`flex h-5 w-5 flex-none items-center justify-center rounded-full text-[11px] ${vistos.has(k) || concluidos.includes(k) ? "bg-verde text-white" : "bg-linha text-texto-3"}`}>{vistos.has(k) || concluidos.includes(k) ? "✓" : k + 1}</span>
                 <span className="truncate">{rotulo(c, k)}</span>
               </button>
             </li>
