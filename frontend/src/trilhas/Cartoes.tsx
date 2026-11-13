@@ -124,7 +124,11 @@ function GraficoCard({ c }: { c: Extract<Card, { tipo: "grafico" }> }) {
 
 /** Um card da trilha. `aoResponder` só dispara nos cards interativos (primeira resposta). */
 export default function CartaoTrilha(p: { c: Card; aoResponder: (ok: boolean) => void }) {
-  return <div className="entra"><CartaoBase {...p} /></div>;
+  const reduzir = useReducedMotion();
+  return (
+    <motion.div initial={reduzir ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { duration: reduzir ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] } }}
+      exit={{ opacity: 0, y: -6, transition: { duration: reduzir ? 0 : 0.16, ease: "easeIn" } }}><CartaoBase {...p} /></motion.div>
+  );
 }
 
 function CartaoBase({ c, aoResponder }: { c: Card; aoResponder: (ok: boolean) => void }) {

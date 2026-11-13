@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import MiniCalculadora from "../calculadora/MiniCalculadora";
@@ -82,7 +83,7 @@ export default function TrilhaPlayer({ trilha, aoCard, aoTerminar, concluidos = 
         ) : (
           <>
             <div className="text-[13px] text-texto-2">{ehDesafio ? "Desafio" : "Etapa"} {i + 1} de {todos.length}</div>
-            <CartaoTrilha key={i} c={card} aoResponder={(ok) => registra(ok)} />
+            <AnimatePresence mode="wait" initial={false}><CartaoTrilha key={i} c={card} aoResponder={(ok) => registra(ok)} /></AnimatePresence>
             <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-10 -mx-4 flex justify-between gap-3 bg-fundo-2/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:p-0">
               <button type="button" disabled={i === 0} onClick={() => vai(i - 1)} className="min-h-11 flex-1 rounded-pilula bg-[#F0F0F3] px-5 py-2.5 text-link disabled:opacity-40 sm:flex-none">‹ Anterior</button>
               <button type="button" onClick={() => vai(i + 1)} className="min-h-11 flex-1 rounded-pilula bg-azul px-6 py-2.5 font-medium text-white sm:flex-none">{i === todos.length - 1 ? "Concluir" : "Próxima ›"}</button>
