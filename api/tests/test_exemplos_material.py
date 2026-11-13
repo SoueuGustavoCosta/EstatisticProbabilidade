@@ -165,3 +165,8 @@ def test_ler_numeros_formatos_do_material():
 
 def test_teclas_negativo():
     assert teclas("-5+3") == ["(−)", "5", "+", "3", "="]
+
+
+def test_campo_vazio_da_mensagem_amigavel():
+    r = cliente.post("/api/calcular", json={"modulo": "independencia", "P_A": "", "P_B": "", "P_A_inter_B": ""})
+    assert r.status_code == 422 and "Confira os números" in r.json()["detail"]

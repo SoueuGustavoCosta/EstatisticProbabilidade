@@ -23,9 +23,9 @@ Execute uma fase por vez. Ao fim de cada fase: rodar testes, mostrar o resultado
 - [x] `<MiniCalculadora>` com replay de teclas e modo "Eu faço".
 
 ## Fase 3 — Laboratório
-- [ ] Formulários L1–L8, botão "Exemplo do material".
-- [ ] Painel de resultados no topo, gráfico, lista de passos com mini calculadora em cada passo.
-- [ ] Avisos de material (E-xx) e pendências (P-xx) exibidos quando aplicável.
+- [x] Formulários L1–L8, botão "Exemplo do material".
+- [x] Painel de resultados no topo, gráfico, lista de passos com mini calculadora em cada passo.
+- [x] Avisos de material (E-xx) e pendências (P-xx) exibidos quando aplicável.
 
 ## Fase 4 — Trilhas
 - [ ] Personagens SVG (Profª Sigma e Dado) com poses.

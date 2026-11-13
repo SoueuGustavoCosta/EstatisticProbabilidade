@@ -57,4 +57,6 @@ def calcular(pedido: Pedido):
         return func(pedido.model_dump())
     except (ValueError, KeyError, TypeError, ZeroDivisionError) as e:
         msg = f"Faltou preencher: {e.args[0]}" if isinstance(e, KeyError) else str(e)
+        if "Fraction" in msg or isinstance(e, (TypeError, ZeroDivisionError)):
+            msg = "Confira os números: preencha todos os campos com dígitos, vírgula decimal ou fração (1/5); sem dividir por zero."
         raise HTTPException(422, msg)

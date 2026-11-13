@@ -1,5 +1,5 @@
 // Cliente da API do Laboratório (contrato: docs/05).
-export async function calcular(pedido: { modulo: string; casas?: number; [k: string]: unknown }) {
+export async function calcular(pedido: Record<string, unknown>) {
   const r = await fetch("/api/calcular", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
