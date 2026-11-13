@@ -29,7 +29,8 @@ export function Visor({ estado, compacto }: { estado: Estado; compacto?: boolean
           {estado.exib.tipo !== "norm" && <span>{estado.exib.tipo === "fix" ? "FIX" : "SCI"}</span>}
         </div>
         <div className="overflow-hidden whitespace-nowrap text-left" style={{ fontSize: compacto ? 13 : 17, direction: "rtl" }}><bdi>{linha1 || " "}</bdi></div>
-        <div className="text-right font-bold" style={{ fontSize: compacto ? 22 : 30 }}>{linha2}</div>
+        {/* resultado longo (ex.: 98,3333333333) encolhe a fonte em vez de ser cortado */}
+        <div className="overflow-hidden whitespace-nowrap text-right font-bold" style={{ fontSize: Math.max(12, (compacto ? 22 : 30) * Math.min(1, 9 / Math.max(linha2.length, 1))) }}>{linha2}</div>
       </div>
     </div>
   );
