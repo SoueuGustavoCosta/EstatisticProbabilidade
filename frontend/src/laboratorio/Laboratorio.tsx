@@ -87,7 +87,7 @@ export default function Laboratorio() {
         ))}
       </nav>
 
-      <form className="flex flex-col gap-5 rounded-cartao bg-cartao p-4 shadow-cartao sm:p-7" onSubmit={(e) => { e.preventDefault(); executar(); }}>
+      <form key={mid} className="entra flex flex-col gap-5 rounded-cartao bg-cartao p-4 shadow-cartao sm:p-7" onSubmit={(e) => { e.preventDefault(); executar(); }}>
         <p className="m-0 text-texto-2">{m.intro}</p>
         {m.campos.map((c) => <CampoForm key={c.chave} c={c} v={v[c.chave]} set={(x) => setValores({ ...valores, [mid]: { ...v, [c.chave]: x } })} />)}
         <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
@@ -110,7 +110,7 @@ export default function Laboratorio() {
 
       <div ref={topo} className="scroll-mt-16" />
       {resp && (
-        <>
+        <div key={resp.passos.length + String(resp.resultados[0]?.exibicao)} className="entra flex flex-col gap-6 sm:gap-8">
           {resp.avisos.map((a, i) => <p key={i} role="note" className="m-0 rounded-xl bg-aviso-fundo px-4 py-3 text-[15px] text-aviso">⚠️ {a}</p>)}
           <section aria-labelledby="resultados" className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -118,8 +118,8 @@ export default function Laboratorio() {
               <button type="button" onClick={copiar} className="min-h-11 rounded-full bg-[#F0F0F3] px-4 py-2 text-[15px] text-link">{copiado ? "Copiado ✓" : "Copiar resultados"}</button>
             </div>
             <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(150px,100%), 1fr))" }}>
-              {resp.resultados.map((r) => (
-                <a key={r.id} href={r.passo_ref ? `#passo-${r.passo_ref}` : undefined} className="flex min-w-0 flex-col gap-1 rounded-[18px] bg-cartao p-3 text-texto shadow-cartao hover:-translate-y-0.5 sm:p-4">
+              {resp.resultados.map((r, n) => (
+                <a key={r.id} style={{ ["--atraso" as string]: `${Math.min(n, 10) * 45}ms` }} href={r.passo_ref ? `#passo-${r.passo_ref}` : undefined} className="entra flex min-w-0 flex-col gap-1 rounded-[18px] bg-cartao p-3 text-texto shadow-cartao hover:-translate-y-0.5 hover:shadow-lg sm:p-4">
                   <span className="text-[13px] text-texto-2">{r.nome} <span className="font-mono">{r.simbolo}</span></span>
                   <strong className="break-words font-mono text-xl font-semibold text-link sm:text-2xl" data-resultado={r.id}>{r.exibicao}</strong>
                   <span className="text-[13px] text-texto-2">{[r.unidade, r.classificacao].filter(Boolean).join(" · ")}</span>
@@ -129,7 +129,7 @@ export default function Laboratorio() {
           </section>
           {resp.grafico && <Grafico g={resp.grafico} />}
           <ListaPassos passos={resp.passos} />
-        </>
+        </div>
       )}
     </div>
   );

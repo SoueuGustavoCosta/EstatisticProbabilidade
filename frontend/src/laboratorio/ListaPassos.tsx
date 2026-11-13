@@ -47,7 +47,7 @@ function TabelaSimples({ t }: { t: TabelaPasso }) {
 
 export function CartaoPasso({ p }: { p: PassoApi }) {
   return (
-    <article id={`passo-${p.n}`} className="flex min-w-0 scroll-mt-20 flex-col gap-3 rounded-[20px] bg-cartao p-4 shadow-cartao sm:p-6">
+    <article id={`passo-${p.n}`} style={{ ["--atraso" as string]: `${Math.min(p.n, 8) * 60}ms` }} className="entra flex min-w-0 scroll-mt-20 flex-col gap-3 rounded-[20px] bg-cartao p-4 shadow-cartao sm:p-6">
       <header className="flex items-baseline gap-3">
         <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-azul-claro text-sm font-bold text-azul">{p.n}</span>
         <div><h3 className="m-0 text-lg font-semibold sm:text-xl">{p.titulo}</h3><span className="text-[13px] text-texto-2">Fonte: {p.fonte}</span></div>

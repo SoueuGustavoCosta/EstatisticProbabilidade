@@ -53,7 +53,7 @@ export default function TrilhaPlayer({ trilha, aoCard, aoTerminar, concluidos = 
           <h1 className="m-0 text-[22px] font-bold leading-tight sm:text-[26px]">{trilha.titulo}</h1>
           <span className="text-[13px] text-texto-2">{trilha.fonte}</span>
         </div>
-        <div role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Progresso da trilha" className="h-1.5 overflow-hidden rounded-full bg-linha"><div className="h-full rounded-full bg-azul transition-all" style={{ width: `${pct}%` }} /></div>
+        <div role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Progresso da trilha" className="h-1.5 overflow-hidden rounded-full bg-linha"><div className="h-full rounded-full bg-azul transition-[width] duration-700 ease-out" style={{ width: `${pct}%` }} /></div>
         <details open={desktop} key={String(desktop)} className="group rounded-xl lg:contents">
           <summary className="flex min-h-11 cursor-pointer items-center justify-between rounded-xl bg-white px-4 text-[15px] font-medium lg:hidden">Etapas ({Math.min(i + 1, todos.length)} de {todos.length})<span aria-hidden="true" className="text-texto-2 group-open:rotate-180">⌄</span></summary>
         <ol className="m-0 flex max-h-[50vh] list-none flex-col gap-1 overflow-y-auto p-0 pt-2 lg:pt-0">
@@ -73,7 +73,7 @@ export default function TrilhaPlayer({ trilha, aoCard, aoTerminar, concluidos = 
 
       <section aria-live="polite" className="order-2 flex min-w-0 flex-col gap-4 lg:order-none">
         {fim ? (
-          <div className="flex flex-col items-start gap-4 rounded-[22px] bg-cartao p-8 shadow-cartao">
+          <div className="entra flex flex-col items-start gap-4 rounded-[22px] bg-cartao p-8 shadow-cartao">
             <h2 className="m-0 text-3xl font-bold">Trilha concluída</h2>
             <p className="m-0 text-texto-3">Você passou por {todos.length} etapas de “{trilha.titulo}”.</p>
             <div className="flex gap-3"><Link to="/trilhas" className="rounded-pilula bg-azul px-5 py-2.5 font-medium text-white">Voltar às trilhas</Link>

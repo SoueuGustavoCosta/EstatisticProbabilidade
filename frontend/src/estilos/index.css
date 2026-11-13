@@ -26,6 +26,7 @@
 
 html {
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
@@ -45,6 +46,35 @@ a {
 :focus-visible {
   outline: 2px solid var(--azul);
   outline-offset: 2px;
+}
+
+/* Movimento suave: tudo entra com fade + leve subida; cor, sombra e posição mudam em 0,2 s. */
+:root {
+  --suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes entra {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.entra {
+  animation: entra 0.45s var(--suave) backwards;
+  animation-delay: var(--atraso, 0ms);
+}
+button, a, summary, select, input, textarea, [role="radio"] {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease,
+    transform 0.25s var(--suave), opacity 0.2s ease, filter 0.2s ease;
+}
+button:not(:disabled):active, [role="radio"]:not(:disabled):active {
+  transform: scale(0.97);
+}
+a.hover\:-translate-y-0\.5:active { transform: scale(0.985); }
+details > summary { list-style-position: inside; }
+details[open] > :not(summary) {
+  animation: entra 0.35s var(--suave) backwards;
+}
+details > summary span[aria-hidden] { transition: transform 0.3s var(--suave); display: inline-block; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

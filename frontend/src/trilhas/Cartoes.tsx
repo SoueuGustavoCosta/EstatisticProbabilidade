@@ -16,7 +16,7 @@ export const Duvida_ = ({ d }: { d: Duvida }) => (
 const Titulo = ({ t }: { t?: string }) => (t ? <h2 className="m-0 text-2xl font-semibold">{t}</h2> : null);
 const Fonte = ({ f }: { f?: string }) => (f ? <span className="text-[13px] text-texto-2">Fonte: {f}</span> : null);
 const Retorno = ({ ok, texto }: { ok: boolean; texto: string }) => (
-  <p role="status" className={`m-0 rounded-xl px-4 py-3 text-[15px] ${ok ? "bg-verde-fundo text-verde" : "bg-vermelho-fundo text-vermelho"}`}>{ok ? "Certo. " : "Ainda não. "}{texto}</p>
+  <p role="status" className={`entra m-0 rounded-xl px-4 py-3 text-[15px] ${ok ? "bg-verde-fundo text-verde" : "bg-vermelho-fundo text-vermelho"}`}>{ok ? "Certo. " : "Ainda não. "}{texto}</p>
 );
 
 function TabelaAnimada({ c }: { c: Extract<Card, { tipo: "tabela" }> }) {
@@ -123,7 +123,11 @@ function GraficoCard({ c }: { c: Extract<Card, { tipo: "grafico" }> }) {
 }
 
 /** Um card da trilha. `aoResponder` só dispara nos cards interativos (primeira resposta). */
-export default function CartaoTrilha({ c, aoResponder }: { c: Card; aoResponder: (ok: boolean) => void }) {
+export default function CartaoTrilha(p: { c: Card; aoResponder: (ok: boolean) => void }) {
+  return <div className="entra"><CartaoBase {...p} /></div>;
+}
+
+function CartaoBase({ c, aoResponder }: { c: Card; aoResponder: (ok: boolean) => void }) {
   switch (c.tipo) {
     case "fala":
       return (

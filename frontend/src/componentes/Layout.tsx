@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useProgresso } from "../progresso/store";
 
 const Icone = ({ children }: { children: ReactNode }) => (
@@ -14,6 +14,7 @@ const links = [
 
 export default function Layout() {
   const { xp, streak } = useProgresso();
+  const { pathname } = useLocation();
   return (
     <div className="min-h-screen pb-[calc(64px+env(safe-area-inset-bottom))] sm:pb-0">
       <a href="#conteudo" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-30 focus:rounded-lg focus:bg-white focus:px-3 focus:py-2">Pular para o conteúdo</a>
@@ -29,7 +30,7 @@ export default function Layout() {
         </div>
       </header>
 
-      <main id="conteudo"><Outlet /></main>
+      <main id="conteudo" key={pathname} className="entra"><Outlet /></main>
 
       <footer className="mx-auto max-w-[1080px] border-t border-linha px-4 py-6 text-xs text-texto-2 sm:px-6">
         Conteúdo baseado nos slides das aulas 1 a 6 e na apostila da disciplina.
