@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { medalhas } from "../progresso/logica";
+import { useProgresso } from "../progresso/store";
 import { ListaTrilhas } from "./Trilhas";
 
 const areas = [
@@ -8,6 +10,7 @@ const areas = [
 ];
 
 export default function Inicio() {
+  const meds = medalhas(useProgresso());
   return (
     <>
       <section className="flex flex-col items-center gap-[18px] px-6 pb-16 pt-[88px] text-center">
@@ -35,6 +38,13 @@ export default function Inicio() {
           </Link>
         ))}
       </section>
+
+      {meds.length > 0 && (
+        <section aria-label="Medalhas" className="mx-auto flex max-w-[1080px] flex-wrap items-center gap-2 px-6 pb-10">
+          <span className="text-[15px] font-semibold">Medalhas</span>
+          {meds.map((n) => <span key={n} className="rounded-full bg-verde-fundo px-3 py-1 text-[13px] font-semibold text-verde" title={`Trilha ${n} concluída`}>Trilha {n}</span>)}
+        </section>
+      )}
 
       <section aria-labelledby="trilhas" className="bg-fundo px-6 pb-[88px] pt-[72px]">
         <div className="mx-auto flex max-w-[1080px] flex-col gap-7">

@@ -34,8 +34,8 @@ Execute uma fase por vez. Ao fim de cada fase: rodar testes, mostrar o resultado
 - [x] Desafios usando `data/exercicios.json`.
 
 ## Fase 5 — Gamificação e polimento
-- [ ] XP, streak, medalhas, progresso no localStorage.
-- [ ] Acessibilidade (reduced motion, contraste, teclado) e Lighthouse.
+- [x] XP, streak, medalhas, progresso no localStorage.
+- [x] Acessibilidade (reduced motion, foco visível, link para pular ao conteúdo, teclado); Lighthouse: ver testes finais.
 - [ ] Revisão final: percorrer cada fórmula do app e conferir a fonte no `02`. Nada sem fonte.
 
 ## Fase 6 (opcional) — Supabase
