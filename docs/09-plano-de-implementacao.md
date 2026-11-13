@@ -1,4 +1,4 @@
-# 09 — Plano de implementação (para o Claude Code)
+﻿# 09 — Plano de implementação (para o Claude Code)
 
 Execute uma fase por vez. Ao fim de cada fase: rodar testes, mostrar o resultado ao Gustavo e só então seguir.
 
@@ -18,9 +18,9 @@ Execute uma fase por vez. Ao fim de cada fase: rodar testes, mostrar o resultado
 - [x] Rota `POST /api/calcular` com os módulos do `05`.
 
 ## Fase 2 — Calculadora científica
-- [ ] Motor TS (parser, precedência, funções, modo SD) + testes vitest.
-- [ ] Layout fx-82MS fiel (conferir com o manual/foto oficial).
-- [ ] `<MiniCalculadora>` com replay de teclas e modo "Eu faço".
+- [x] Motor TS (parser, precedência, funções, modo SD) + testes vitest.
+- [x] Layout fx-82MS conforme o protótipo (conferência com foto/manual oficial da Casio pendente: o MANUAL.pdf é de normas ABNT).
+- [x] `<MiniCalculadora>` com replay de teclas e modo "Eu faço".
 
 ## Fase 3 — Laboratório
 - [ ] Formulários L1–L8, botão "Exemplo do material".
