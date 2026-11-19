@@ -37,8 +37,18 @@ def sistematica(N, n, inicio=None):
     return k, elementos, passos, avisos
 
 
+def _arredonda_mantendo_total(exatos: dict, n: int) -> dict:
+    """Arredonda cada valor e garante que a soma seja exatamente n (decisão P-07, revista em 17/11/2026).
+    Primeiro pega a parte inteira; as unidades que faltam vão para os estratos com a maior parte decimal."""
+    final = {k: math.floor(v) for k, v in exatos.items()}
+    faltam = n - sum(final.values())
+    for k in sorted(exatos, key=lambda k: exatos[k] - final[k], reverse=True)[:faltam]:
+        final[k] += 1
+    return final
+
+
 def estratificada(estratos: dict, n):
-    """Cada estrato recebe (tamanho ÷ N) × n, arredondado para cima (decisão P-07).
+    """Cada estrato recebe (tamanho ÷ N) × n, arredondado sem mudar o total da amostra (decisão P-07).
     Devolve ({estrato: valor}, [Passo], avisos)."""
     n = int(n)
     tam = {k: F(v) for k, v in estratos.items()}
@@ -47,19 +57,19 @@ def estratificada(estratos: dict, n):
         raise ValueError("Informe o tamanho dos estratos e da amostra.")
     f = "Aula 01 · Amostragem estratificada"
     exatos = {k: v / N * n for k, v in tam.items()}
-    final = {k: math.ceil(v) for k, v in exatos.items()}
+    final = _arredonda_mantendo_total(exatos, n)
+    quebrados = any(v.denominator != 1 for v in exatos.values())
     linhas, tl = [f"População total: {' + '.join(d(v) for v in tam.values())} = {d(N)}.", "Cada estrato mantém a mesma proporção da população: (estrato ÷ N) × n."], []
     for k in tam:
-        linhas.append(f"{k}: ({d(tam[k])} ÷ {d(N)}) × {n} {ig(exatos[k])}" + ("" if exatos[k].denominator == 1 else f" → arredondado para cima: {final[k]}"))
+        linhas.append(f"{k}: ({d(tam[k])} ÷ {d(N)}) × {n} {ig(exatos[k])}" + ("" if exatos[k].denominator == 1 else f" → {final[k]}"))
         tl.append([k, d(tam[k]), fmt(exatos[k]), final[k]])
+    if quebrados:
+        linhas.append(f"Como não deu inteiro, arredondamos sem mudar o total: cada estrato fica com a parte inteira e as unidades que faltam para chegar a {n} vão para os estratos com a maior parte decimal.")
     soma = sum(final.values())
-    avisos = []
     linhas.append(f"Conferência: {' + '.join(str(v) for v in final.values())} = {soma} (a amostra pedida é {n}).")
-    if soma > n:
-        avisos.append(f"Ao arredondar para cima, a amostra ficou com {soma} elementos, {soma - n} a mais que os {n} pedidos.")
     p = Passo("Elementos de cada estrato", f, formula_latex=r"n_{estrato}=\frac{N_{estrato}}{N}\times n", linhas=linhas,
               tabela=tabela(["Estrato", "Tamanho", "Valor exato", "Na amostra"], tl, ["Total", d(N), "", soma]),
               resultado=", ".join(f"{k}: {v}" for k, v in final.items()),
-              dica="Quando não dá número inteiro, arredondamos para cima.",
+              dica="Quando não dá número inteiro, arredondamos de forma que a soma continue igual ao tamanho da amostra." if quebrados else None,
               teclas_calculadora=teclas(f"{d(next(iter(tam.values())))}÷{d(N)}×{n}"))
-    return final, [p], avisos
+    return final, [p], []

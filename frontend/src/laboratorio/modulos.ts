@@ -33,7 +33,7 @@ export const MODULOS: Modulo[] = [
       { chave: "classes", rotulo: "Ou classes prontas", tipo: "linhas", colunas: ["limite inferior", "limite superior"], padrao: [["", ""], ["", ""]], opcional: true, aApi: (r: string[][]) => linhasVazias(r), deApi: (v: unknown[][]) => v.map((l) => l.map(String)) }] },
   { id: "amostragem_sistematica", rotulo: "Amostragem sistemática", api: "amostragem_sistematica", exemploDe: "amostragem_sistematica", intro: "k = N ÷ n, arredondado para baixo.",
     campos: [t("N", "N (população)"), t("n", "n (amostra)"), t("inicio", "Ponto de partida (opcional)", { opcional: true })] },
-  { id: "amostragem_estratificada", rotulo: "Amostragem estratificada", api: "amostragem_estratificada", exemploDe: "amostragem_estratificada", intro: "Cada estrato entra com (estrato ÷ N) × n. Se não der inteiro, arredonda para cima.",
+  { id: "amostragem_estratificada", rotulo: "Amostragem estratificada", api: "amostragem_estratificada", exemploDe: "amostragem_estratificada", intro: "Cada estrato entra com (estrato ÷ N) × n. Se não der inteiro, arredonda sem mudar o total da amostra.",
     campos: [{ chave: "estratos", rotulo: "Estratos", tipo: "linhas", colunas: ["nome", "tamanho"], padrao: [["", ""], ["", ""]],
       aApi: (r: string[][]) => Object.fromEntries(linhasVazias(r).map(([a, b]) => [a.trim(), b])), deApi: (v: Record<string, number>) => Object.entries(v).map(([a, b]) => [a, String(b)]) }, t("n", "n (amostra)")] },
   { id: "prob_classica", rotulo: "Probabilidade clássica", api: "prob_classica", exemploDe: "prob_classica", intro: "Casos favoráveis ÷ casos totais.",

@@ -37,8 +37,8 @@ Atualizar este arquivo sempre que uma pendência for resolvida (anotar data e qu
 ## Decisões do Gustavo (13/11/2026)
 - **P-01 — Ponto médio.** Parêntese = limite NÃO conta; colchete = limite conta. Então o ponto médio usa o **primeiro e o último valor que pertencem à classe**:
   - `(32, 48]` → 32 não conta, 48 conta → (33 + 48) ÷ 2 = 40,5 (igual ao material).
-  - `[16, 20)` → 16 conta, 20 não conta → (16 + 19) ÷ 2 = 17,5.
+  - ~~`[16, 20)` → (16 + 19) ÷ 2 = 17,5~~ — **revisto em 17/11/2026:** a regra do primeiro/último valor fica só para `(a, b]` com dados inteiros (o caso do material). Os outros intervalos usam (a + b) ÷ 2: `[16, 20)` → 18.
   - Vale para dados inteiros (como nos exemplos do material). Para dados com decimais, o material não tem exemplo: manter como pendência se aparecer.
 - **P-06 — Calculadora.** Casio fx-82MS.
-- **P-07 — Estratificada.** Quando não der inteiro, **arredondar para cima**. Mostrar o valor exato, o arredondado e um aviso se a soma da amostra passar de n.
+- **P-07 — Estratificada.** ~~Arredondar para cima~~ — **revisto em 17/11/2026:** arredondar mantendo o total igual a n (parte inteira + as unidades que faltam vão para as maiores partes decimais). Ex.: A3 nº 5 → 23 meninos e 27 meninas; A3 nº 3 → 6, 5, 5, 4, 6, 5, 5, 4 = 40. Mostrar o valor exato e o arredondado.
 - **P-08 — Normal.** Só os casos da apostila: P(0 ≤ Z ≤ z), simetria para Z negativo e intervalo que cruza a média (soma das duas áreas, como no exercício U6 Q8). Os outros casos ficam fora.

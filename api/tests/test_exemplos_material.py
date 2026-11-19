@@ -87,10 +87,41 @@ def test_binomial_faixa():
     assert {x["id"]: x["valor"] for x in r["resultados"]}["P"] == 0.5
 
 
-def test_estratificada_arredonda_para_cima_e_avisa():
-    r = MODULOS["amostragem_estratificada"]({"modulo": "amostragem_estratificada", "estratos": {"A": 100, "B": 100, "C": 50}, "n": 7})
-    obtido = {x["id"]: x["valor"] for x in r["resultados"]}
-    assert (obtido["A"], obtido["B"], obtido["C"]) == (3, 3, 2) and r["avisos"]
+def _estrat(estratos, n):
+    r = MODULOS["amostragem_estratificada"]({"modulo": "amostragem_estratificada", "estratos": estratos, "n": n})
+    return {x["id"]: x["valor"] for x in r["resultados"]}
+
+
+def test_estratificada_mantem_total_da_amostra():
+    obtido = _estrat({"A": 100, "B": 100, "C": 50}, 7)
+    assert (obtido["A"], obtido["B"], obtido["C"], obtido["total_amostra"]) == (3, 3, 1, 7)
+
+
+def test_estratificada_exercicio_a3_5_meninos():
+    obtido = _estrat({"meninos": 280, "meninas": 320}, 50)
+    assert (obtido["meninos"], obtido["meninas"], obtido["total_amostra"]) == (23, 27, 50)
+
+
+def test_estratificada_exercicio_a3_3_periodos():
+    obtido = _estrat({f"P{i}": v for i, v in enumerate([35, 32, 30, 28, 35, 32, 31, 27], 1)}, 40)
+    assert [obtido[f"P{i}"] for i in range(1, 9)] == [6, 5, 5, 4, 6, 5, 5, 4] and obtido["total_amostra"] == 40
+
+
+def _classes(classes, intervalo, inteiros=True):
+    r = MODULOS["tabela_classes"]({"modulo": "tabela_classes", "classes": classes, "intervalo": intervalo,
+                                   "dados_inteiros": inteiros, "tipo_dados": "populacao"})
+    return {x["id"]: x["valor"] for x in r["resultados"]}
+
+
+def test_ponto_medio_material_32_48():
+    obtido = _classes([[32, 48, 3], [48, 64, 5], [64, 80, 7], [80, 96, 5]], "(a,b]")
+    assert obtido["pontos_medios"] == [40.5, 56.5, 72.5, 88.5] and obtido["media_ponderada"] == 67.7
+
+
+def test_ponto_medio_fechado_a_esquerda_usa_media_dos_limites():
+    for inteiros in (True, False):
+        obtido = _classes([[16, 20, 8], [20, 24, 16], [24, 28, 12], [28, 32, 4]], "[a,b)", inteiros)
+        assert obtido["pontos_medios"] == [18, 22, 26, 30] and obtido["media_ponderada"] == 23.2
 
 
 def test_sistematica_arredonda_para_baixo():
@@ -105,8 +136,9 @@ def test_montar_classes_reproduz_o_material():
 
 
 def test_ponto_medio_colchete_p01():
+    """P-01 revista (17/11/2026): fora de (a, b] o ponto médio é (a + b) ÷ 2."""
     r = MODULOS["tabela_classes"]({"modulo": "tabela_classes", "classes": [[16, 20, 4], [20, 24, 6]], "intervalo": "[a,b)"})
-    assert {x["id"]: x["valor"] for x in r["resultados"]}["pontos_medios"] == [17.5, 21.5]
+    assert {x["id"]: x["valor"] for x in r["resultados"]}["pontos_medios"] == [18, 22]
 
 
 def test_tabela_frequencia_com_ni_na_variancia():
@@ -183,7 +215,7 @@ def test_trabalho_tma_call_center_classes_de_25_a_partir_de_40():
     t = MODULOS["tabela_classes"]({"modulo": "tabela_classes", "classes": [[40 + 25 * i, 65 + 25 * i, n] for i, n in enumerate(o["ni"])],
                                    "intervalo": "[a,b)", "tipo_dados": "populacao"})
     m = {x["id"]: x["valor"] for x in t["resultados"]}
-    assert m["pontos_medios"] == [52, 77, 102, 127, 152, 177] and m["media_ponderada"] == 104.5
+    assert m["pontos_medios"] == [52.5, 77.5, 102.5, 127.5, 152.5, 177.5] and m["media_ponderada"] == 105
     b = MODULOS["dados_brutos"]({"modulo": "dados_brutos", "valores": v, "tipo_dados": "populacao"})
     d = {x["id"]: x["valor"] for x in b["resultados"]}
     assert d["amplitude_total"] == 133 and d["mediana"] == 99.5 and abs(d["media"] - 103.925) < 1e-9

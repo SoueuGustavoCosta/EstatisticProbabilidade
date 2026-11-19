@@ -44,8 +44,9 @@ def texto_classe(a, b, intervalo):
 
 
 def ponto_medio(a, b, intervalo, inteiros=True):
-    """Regra do material (P-01): (primeiro valor da classe + último valor da classe) ÷ 2."""
-    if not inteiros:
+    """P-01 (revista em 17/11/2026): a regra do material — (primeiro valor da classe + último valor da classe) ÷ 2 —
+    só vale para (a, b] com dados inteiros, que é o caso dos slides. Nos outros intervalos: (a + b) ÷ 2."""
+    if not inteiros or intervalo != "(a,b]":
         return (a + b) / 2, f"({d(a)} + {d(b)}) ÷ 2"
     i, f = limites(a, b, intervalo)
     return (i + f) / 2, f"({d(i)} + {d(f)}) ÷ 2"
@@ -57,13 +58,15 @@ def pontos_medios(classes, intervalo, inteiros=True):
     for (a, b), (pm, conta) in zip(classes, pms):
         linhas.append(f"{texto_classe(a, b, intervalo)}: {conta} = {d(pm)}")
     aviso = None
-    if inteiros:
+    if inteiros and intervalo == "(a,b]":
         aviso = ("Parêntese = limite fora da classe; colchete = limite dentro. Por isso o ponto médio de (32, 48] usa 33 e não 32: "
-                 "(33 + 48) ÷ 2 = 40,5, como no material.") if intervalo[0] == "(" or intervalo[-1] == ")" else None
+                 "(33 + 48) ÷ 2 = 40,5, como no material.")
+    elif intervalo != "(a,b]":
+        aviso = "Para este tipo de intervalo o ponto médio é (limite inferior + limite superior) ÷ 2. Ex.: [16, 20) → (16 + 20) ÷ 2 = 18."
     p = Passo("Ponto médio de cada classe", "Aula 02 · Média ponderada com classes / Apostila p.25",
               linhas=["Com classes não sabemos os valores exatos, então cada classe é representada pelo ponto médio."] + linhas,
               dica=aviso, resultado=", ".join(d(pm) for pm, _ in pms))
-    if not inteiros:
+    if not inteiros and intervalo == "(a,b]":
         p.aviso_material = "Pendência P-01: o material só mostra ponto médio para dados inteiros. Para dados com decimais usamos (limite inferior + limite superior) ÷ 2."
     return [pm for pm, _ in pms], p
 
