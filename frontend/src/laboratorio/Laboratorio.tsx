@@ -76,6 +76,18 @@ export default function Laboratorio() {
     setCopiado(true); setTimeout(() => setCopiado(false), 1500);
   };
 
+  // Topo: média, moda e mediana. Depois o gráfico. Depois os demais resultados.
+  const ORDEM_TOPO = ["media", "moda", "mediana"];
+  const principais = resp ? ORDEM_TOPO.map((id) => resp.resultados.find((r) => r.id === id)).filter((r): r is NonNullable<typeof r> => !!r) : [];
+  const demais = resp ? resp.resultados.filter((r) => !ORDEM_TOPO.includes(r.id)) : [];
+  const cartao = (r: RespostaApi["resultados"][number], n: number) => (
+    <a key={r.id} style={{ ["--atraso" as string]: `${Math.min(n, 10) * 45}ms` }} href={r.passo_ref ? `#passo-${r.passo_ref}` : undefined} className="entra flex min-w-0 flex-col gap-1 rounded-[18px] bg-cartao p-3 text-texto shadow-cartao hover:-translate-y-0.5 hover:shadow-lg sm:p-4">
+      <span className="text-[13px] text-texto-2">{r.nome} <span className="font-mono">{r.simbolo}</span></span>
+      <strong className="break-words font-mono text-xl font-semibold text-link sm:text-2xl" data-resultado={r.id}>{r.exibicao}</strong>
+      <span className="text-[13px] text-texto-2">{[r.unidade, r.classificacao].filter(Boolean).join(" · ")}</span>
+    </a>
+  );
+
   return (
     <div className="mx-auto flex max-w-[1080px] flex-col gap-6 px-4 pb-10 pt-6 sm:gap-8 sm:px-6 sm:pb-20 sm:pt-10">
       <div><h1 className="m-0 text-[32px] font-bold sm:text-[40px]">Laboratório</h1><p className="mt-2 text-texto-2">Digite seus dados. Veja os resultados, o gráfico e cada passo do cálculo.</p></div>
@@ -118,16 +130,18 @@ export default function Laboratorio() {
               <button type="button" onClick={copiar} className="min-h-11 rounded-full bg-[#F0F0F3] px-4 py-2 text-[15px] text-link">{copiado ? "Copiado ✓" : "Copiar resultados"}</button>
             </div>
             <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(150px,100%), 1fr))" }}>
-              {resp.resultados.map((r, n) => (
-                <a key={r.id} style={{ ["--atraso" as string]: `${Math.min(n, 10) * 45}ms` }} href={r.passo_ref ? `#passo-${r.passo_ref}` : undefined} className="entra flex min-w-0 flex-col gap-1 rounded-[18px] bg-cartao p-3 text-texto shadow-cartao hover:-translate-y-0.5 hover:shadow-lg sm:p-4">
-                  <span className="text-[13px] text-texto-2">{r.nome} <span className="font-mono">{r.simbolo}</span></span>
-                  <strong className="break-words font-mono text-xl font-semibold text-link sm:text-2xl" data-resultado={r.id}>{r.exibicao}</strong>
-                  <span className="text-[13px] text-texto-2">{[r.unidade, r.classificacao].filter(Boolean).join(" · ")}</span>
-                </a>
-              ))}
+              {principais.map((r, n) => cartao(r, n))}
             </div>
           </section>
           {resp.grafico && <Grafico g={resp.grafico} />}
+          {demais.length > 0 && (
+            <section aria-labelledby="outros-resultados" className="flex flex-col gap-4">
+              <h2 id="outros-resultados" className="m-0 text-[22px] font-semibold">Outros resultados</h2>
+              <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(150px,100%), 1fr))" }}>
+                {demais.map((r, n) => cartao(r, n))}
+              </div>
+            </section>
+          )}
           <ListaPassos passos={resp.passos} />
         </div>
       )}

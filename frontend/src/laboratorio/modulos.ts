@@ -11,7 +11,7 @@ export type Campo =
 
 export interface Modulo { id: string; rotulo: string; api: string; exemploDe: string; campos: Campo[]; intro: string }
 
-const PD: Campo = { chave: "tipo_dados", rotulo: "Os dados são", tipo: "seg", padrao: "amostra", opcoes: [["populacao", "População"], ["amostra", "Amostra"]] };
+const PD: Campo = { chave: "tipo_dados", rotulo: "Os dados são", tipo: "seg", padrao: "populacao", opcoes: [["populacao", "População"], ["amostra", "Amostra"]] };
 const UN: Campo = { chave: "unidade", rotulo: "Unidade (opcional)", tipo: "texto", opcional: true, placeholder: "s, min, ms, pontos…" };
 const INTERVALO: Campo = { chave: "intervalo", rotulo: "Intervalo das classes", tipo: "seg", padrao: "(a,b]", opcoes: [["(a,b]", "( a, b ]"], ["[a,b)", "[ a, b )"], ["[a,b]", "[ a, b ]"], ["(a,b)", "( a, b )"]] };
 const t = (chave: string, rotulo: string, extra: Partial<Base & { placeholder: string }> = {}): Campo => ({ chave, rotulo, tipo: "texto", ...extra });

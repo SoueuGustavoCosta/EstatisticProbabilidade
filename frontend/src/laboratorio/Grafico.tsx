@@ -6,7 +6,14 @@ const virgula = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",
 
 /** Barras com eixo numérico e linhas de média, mediana e moda (ajuda a ver a assimetria). */
 function BarrasNumericas({ g }: { g: G }) {
-  const W = 640, H = 270, P = { l: 36, r: 16, t: 28, b: 34 };
+  // Marcadores no mesmo valor viram um só rótulo ("Média = Mediana 7"); cada rótulo ganha sua própria linha no topo.
+  const grupos: { x: number; nomes: string[] }[] = [];
+  for (const m of g.marcadores) {
+    const gr = grupos.find((q) => Math.abs(q.x - m.x) < 1e-9);
+    if (gr) { if (!gr.nomes.includes(m.nome)) gr.nomes.push(m.nome); } else grupos.push({ x: m.x, nomes: [m.nome] });
+  }
+  const LINHA = 15;
+  const W = 640, H = 250 + grupos.length * LINHA, P = { l: 36, r: 16, t: 14 + grupos.length * LINHA, b: 34 };
   const xs = g.series.map((s) => s.x as number);
   const lo = Math.min(...xs, ...g.marcadores.map((m) => m.x)), hi = Math.max(...xs, ...g.marcadores.map((m) => m.x));
   const folga = (hi - lo || 1) * 0.06;
@@ -22,12 +29,17 @@ function BarrasNumericas({ g }: { g: G }) {
       {g.series.map((s, i) => <rect key={i} x={X(s.x) - largura / 2} y={Y(s.n)} width={largura} height={H - P.b - Y(s.n)} rx={2} fill="#B9D6F5" />)}
       {ticks.map((t, i) => <text key={i} x={X(t)} y={H - 12} textAnchor="middle" fontSize="11" fill="#6E6E73">{virgula(t)}</text>)}
       {[0, nmax].map((v) => <text key={v} x={P.l - 6} y={Y(v) + 4} textAnchor="end" fontSize="11" fill="#6E6E73">{v}</text>)}
-      {g.marcadores.map((m, i) => (
-        <g key={i}>
-          <line x1={X(m.x)} x2={X(m.x)} y1={P.t - 6} y2={H - P.b} stroke={COR_MARCADOR[m.nome] ?? "#0071E3"} strokeWidth={2} strokeDasharray={m.nome === "Moda" ? "4 3" : undefined} />
-          <text x={X(m.x)} y={12 + (i % 3) * 0} textAnchor={i % 2 ? "start" : "end"} dx={i % 2 ? 3 : -3} fontSize="11" fontWeight="600" fill={COR_MARCADOR[m.nome] ?? "#0071E3"}>{m.nome} {virgula(m.x)}</text>
-        </g>
-      ))}
+      {grupos.map((gr, i) => {
+        const cor = COR_MARCADOR[gr.nomes[0]] ?? "#0071E3";
+        const y = 12 + i * LINHA, px = X(gr.x);
+        const lado = px > W / 2 ? "end" : "start";
+        return (
+          <g key={i}>
+            <line x1={px} x2={px} y1={y + 3} y2={H - P.b} stroke={cor} strokeWidth={2} strokeDasharray={gr.nomes.length === 1 && gr.nomes[0] === "Moda" ? "4 3" : undefined} />
+            <text x={px} y={y} textAnchor={lado} dx={lado === "end" ? -4 : 4} fontSize="11" fontWeight="600" fill={cor}>{gr.nomes.join(" = ")} {virgula(gr.x)}</text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
